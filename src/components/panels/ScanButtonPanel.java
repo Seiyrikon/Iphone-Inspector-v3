@@ -30,6 +30,7 @@ import components.labels.ScanButtonIconLabel;
 import components.labels.ScanButtonTextLabel;
 import components.labels.SerialNoLabel;
 import components.textfields.EidTextField;
+import model.IphoneLabelInformation;
 import model.IphoneModel;
 import services.device.DeviceService;
 import utils.CommandExecutor;
@@ -50,10 +51,13 @@ public class ScanButtonPanel extends JPanel {
     IphoneModel iphone;
     ColorTypeComboBox colorDropdown = null;
 
-    public ScanButtonPanel(InformationContainerPanel infoContainer, DeviceService deviceService, IphoneModel iphone) {
+    IphoneLabelInformation infomationLabel;
+
+    public ScanButtonPanel(InformationContainerPanel infoContainer, DeviceService deviceService, IphoneModel iphone, IphoneLabelInformation informationLabel) {
         this.infoContainer = infoContainer;
         this.deviceService = deviceService;
         this.iphone = iphone;
+        this.infomationLabel = informationLabel;
 
         setOpaque(false);
         setBackground(normalColor);
@@ -120,11 +124,8 @@ public class ScanButtonPanel extends JPanel {
 
         iphone = deviceService.extractInfo();
 
-        // Helper method for spacing
-        final int SPACING = 10;
-
         // --- EID ---
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.EID.get()), new EidTextField()));
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.EID.get()), new EidTextField(infomationLabel)));
 
         // --- COLOR ---
         if(Constants.IPHONE_8.get().equals(iphone.getProductType()) 

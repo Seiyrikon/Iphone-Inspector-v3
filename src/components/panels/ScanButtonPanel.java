@@ -50,6 +50,7 @@ public class ScanButtonPanel extends JPanel {
 
     IphoneModel iphone;
     ColorTypeComboBox colorDropdown = null;
+    StorageTypeComboBox storageDropdown = null;
 
     IphoneLabelInformation informationLabel;
 
@@ -136,36 +137,48 @@ public class ScanButtonPanel extends JPanel {
             || Constants.IPHONE_XS.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_XS_MAX.get().equals(iphone.getProductType())) {
                 colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphoneXAndXsAndXsMaxColors());
+                colorDropdown.setChoice(informationLabel.getProductColor());
         } else if(Constants.IPHONE_XR.get().equals(iphone.getProductType())) {
             colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphoneXrColors());
+            colorDropdown.setChoice(informationLabel.getProductColor());
         } else if(Constants.IPHONE_11.get().equals(iphone.getProductType())) {
             colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone11Colors());
+            colorDropdown.setChoice(informationLabel.getProductColor());
         } else if(Constants.IPHONE_11_PRO.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_11_PRO_MAX.get().equals(iphone.getProductType())) {
                 colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone11ProAnd11ProMaxColors());
+                colorDropdown.setChoice(informationLabel.getProductColor());
         } else if(Constants.IPHONE_12.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_12_MINI.get().equals(iphone.getProductType())) {
                 colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone12And12MiniColors());
+                colorDropdown.setChoice(informationLabel.getProductColor());
         } else if(Constants.IPHONE_12_PRO.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_12_PRO_MAX.get().equals(iphone.getProductType())) {
                 colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone12ProAnd12ProMaxColors());
+                colorDropdown.setChoice(informationLabel.getProductColor());
         } else if(Constants.IPHONE_13.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_13_MINI.get().equals(iphone.getProductType())) {
                 colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone13Ad13MiniColors());
+                colorDropdown.setChoice(informationLabel.getProductColor());
         } else if(Constants.IPHONE_13_PRO.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_13_PRO_MAX.get().equals(iphone.getProductType())) {
                 colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone13ProAnd13ProMaxColors());
+                colorDropdown.setChoice(informationLabel.getProductColor());
         } else if(Constants.IPHONE_SE.get().equals(iphone.getProductType())) {
             colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphoneSeColors());
+            colorDropdown.setChoice(informationLabel.getProductColor());
         } else if(Constants.IPHONE_14.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_14_PLUS.get().equals(iphone.getProductType())) {
                 colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone14And14PlusColors());
+                colorDropdown.setChoice(informationLabel.getProductColor());
         } else if(Constants.IPHONE_14_PRO.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_14_PRO_MAX.get().equals(iphone.getProductType())) {
                 colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone14ProAnd14ProMaxColors());
+                colorDropdown.setChoice(informationLabel.getProductColor());
         } else if(Constants.IPHONE_15.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_15_PLUS.get().equals(iphone.getProductType())) {
                 colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone15And15PlusColors());
+                colorDropdown.setChoice(informationLabel.getProductColor());
         } else if(Constants.IPHONE_15_PRO.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_15_PRO_MAX.get().equals(iphone.getProductType())) {
                 colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone15ProAnd15ProMaxColors());
@@ -174,7 +187,9 @@ public class ScanButtonPanel extends JPanel {
         infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.COLOR_TYPE.get()), colorDropdown));
         
         // --- STORAGE ---
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.STORAGE_TYPE.get()), new StorageTypeComboBox(iphone.getStorageTypes())));
+        storageDropdown = new StorageTypeComboBox(informationLabel, iphone.getStorageTypes());
+        storageDropdown.setChoice(informationLabel.getStorageType());
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.STORAGE_TYPE.get()), storageDropdown));
 
         // --- IMEI ---
         infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.IMEI.get()), new ImeiLabel(iphone.getImei())));

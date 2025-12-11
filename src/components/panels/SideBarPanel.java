@@ -5,6 +5,7 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
+import components.frame.PdfViewerFrame;
 import model.IphoneModel;
 import services.device.DeviceService;
 
@@ -14,10 +15,8 @@ public class SideBarPanel extends JPanel{
     PrintButtonPanel printButton;
     Size120x80Panel size120x80Panel;
     Size20x80Panel size20x80Panel;
-    IphoneModel iphone;
 
-    public SideBarPanel(InformationContainerPanel infoContainer, DeviceService deviceService, IphoneModel iphone) {
-        this.iphone = iphone;
+    public SideBarPanel(InformationContainerPanel infoContainer, DeviceService deviceService, IphoneModel iphone, PdfViewerFrame pdfViewer) {
 
         setPreferredSize(new Dimension(200, 600));
         setLayout(null);
@@ -27,7 +26,7 @@ public class SideBarPanel extends JPanel{
         scanButton.setBounds(10, 20, 180, 50);
         add(scanButton);
 
-        generateButton = new GenerateButtonPanel(infoContainer, iphone);
+        generateButton = new GenerateButtonPanel(infoContainer, iphone, pdfViewer);
         generateButton.setBounds(10, 100, 180, 50);
         add(generateButton);
 

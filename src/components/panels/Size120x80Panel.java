@@ -1,6 +1,7 @@
 package components.panels;
 
 import java.awt.BasicStroke;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
@@ -11,10 +12,16 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import org.icepdf.ri.common.SwingController;
+import org.icepdf.ri.common.SwingViewBuilder;
+
+import components.frame.PdfViewerFrame;
 import components.labels.Size120x80IconLabel;
 import components.labels.Size120x80TextLabel;
+import utils.Constants;
 
 public class Size120x80Panel extends JPanel {
     Size120x80IconLabel iconLabel;
@@ -24,7 +31,11 @@ public class Size120x80Panel extends JPanel {
     private Color normalColor = new Color(56, 57, 58);
     private Color hoverColor = new Color(240, 240, 240);
 
-    public Size120x80Panel() {
+    public PdfViewerFrame pdfViewer;
+
+    public Size120x80Panel(PdfViewerFrame pdfViewer) {
+        this.pdfViewer = pdfViewer;
+
         setOpaque(false);
         setBackground(new Color(56, 57, 58));
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -58,6 +69,7 @@ public class Size120x80Panel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("Size 120mm x 80mm Button clicked!");
+                viewPdf();
             }
 
             @Override
@@ -91,5 +103,11 @@ public class Size120x80Panel extends JPanel {
 
         g2.dispose();
         super.paintComponent(g);
+    }
+
+    private void viewPdf() {
+        pdfViewer.is120x80 = true;
+        pdfViewer.setVisible(true);
+        pdfViewer.controller.openDocument(Constants.PDF_PATH.get() + Constants.PDF_120X80.get());
     }
 }

@@ -66,7 +66,12 @@ public enum Constants {
     IPHONE_15("iPhone 15"),
     IPHONE_15_PLUS("iPhone 15 Plus"),
     IPHONE_15_PRO("iPhone 15 Pro"),
-    IPHONE_15_PRO_MAX("iPhone 15 Pro Max");
+    IPHONE_15_PRO_MAX("iPhone 15 Pro Max"),
+    
+    PDF_VIEWER_TITLE("Iphone Label Viewer"),
+    PDF_PATH("src/resources/pdf/"),
+    PDF_120X80("pdf_120x80.pdf"),
+    PDF_20X80("pdf_20x80.pdf");
 
     private final String value;
 

@@ -21,6 +21,7 @@ public class MainFrame extends JFrame {
     MainPanel mainPanel;
     InformationContainerPanel infoContainer;
     IphoneModel iphone;
+    PdfViewerFrame pdfViewer;
 
     public MainFrame() {
         DeviceService deviceService = new DeviceService(null);
@@ -41,7 +42,9 @@ public class MainFrame extends JFrame {
         infoContainer = bodyContainer.getInfoContainer();
         iphone = new IphoneModel();
 
-        sideBar = new SideBarPanel(infoContainer, deviceService, iphone);
+        pdfViewer = new PdfViewerFrame();
+
+        sideBar = new SideBarPanel(infoContainer, deviceService, iphone, pdfViewer);
 
         setContentPane(mainPanel);
 

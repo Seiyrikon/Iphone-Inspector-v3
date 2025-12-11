@@ -13,8 +13,10 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import components.frame.PdfViewerFrame;
 import components.labels.Size20x80IconLabel;
 import components.labels.Size20x80TextLabel;
+import utils.Constants;
 
 public class Size20x80Panel extends JPanel {
     Size20x80IconLabel iconLabel;
@@ -24,7 +26,11 @@ public class Size20x80Panel extends JPanel {
     private Color normalColor = new Color(56, 57, 58);
     private Color hoverColor = new Color(240, 240, 240);
 
-    public Size20x80Panel() {
+    PdfViewerFrame pdfViewer;
+
+    public Size20x80Panel(PdfViewerFrame pdfViewer) {
+        this.pdfViewer = pdfViewer;
+
         setOpaque(false);
         setBackground(new Color(56, 57, 58));
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -58,6 +64,7 @@ public class Size20x80Panel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("Size 20mm x 80mm Button clicked!");
+                viewPdf();
             }
 
             @Override
@@ -91,5 +98,11 @@ public class Size20x80Panel extends JPanel {
 
         g2.dispose();
         super.paintComponent(g);
+    }
+
+    private void viewPdf() {
+        pdfViewer.is120x80 = false;
+        pdfViewer.setVisible(true);
+        pdfViewer.controller.openDocument(Constants.PDF_PATH.get() + Constants.PDF_20X80.get());
     }
 }

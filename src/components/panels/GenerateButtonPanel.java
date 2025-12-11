@@ -13,6 +13,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import components.frame.PdfViewerFrame;
 import components.labels.GenerateButtonIconLabel;
 import components.labels.GenerateButtonTextLabel;
 import model.IphoneModel;
@@ -31,9 +32,12 @@ public class GenerateButtonPanel extends JPanel {
     Size120x80Panel size120x80Button;
     Size20x80Panel size20x80Button;
 
-    public GenerateButtonPanel(InformationContainerPanel infoContainer, IphoneModel iphone) {
+    PdfViewerFrame pdfViewer;
+
+    public GenerateButtonPanel(InformationContainerPanel infoContainer, IphoneModel iphone, PdfViewerFrame pdfViewer) {
         this.infoContainer = infoContainer;
         this.iphone = iphone;
+        this.pdfViewer = pdfViewer;
 
         setOpaque(false);
         setBackground(new Color(56, 57, 58));
@@ -110,8 +114,8 @@ public class GenerateButtonPanel extends JPanel {
         infoContainer.removeAll();
         infoContainer.setLayout(new BoxLayout(infoContainer, BoxLayout.Y_AXIS));
 
-        size120x80Button = new Size120x80Panel();
-        size20x80Button = new Size20x80Panel();
+        size120x80Button = new Size120x80Panel(pdfViewer);
+        size20x80Button = new Size20x80Panel(pdfViewer);
 
         infoContainer.add(size120x80Button);
         infoContainer.add(size20x80Button);

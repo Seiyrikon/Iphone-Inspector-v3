@@ -71,7 +71,9 @@ public enum Constants {
     PDF_VIEWER_TITLE("Iphone Label Viewer"),
     PDF_PATH("src/resources/pdf/"),
     PDF_120X80("pdf_120x80.pdf"),
-    PDF_20X80("pdf_20x80.pdf");
+    PDF_20X80("pdf_20x80.pdf"),
+    
+    EPMTY_STRING("");
 
     private final String value;
 

@@ -51,13 +51,13 @@ public class ScanButtonPanel extends JPanel {
     IphoneModel iphone;
     ColorTypeComboBox colorDropdown = null;
 
-    IphoneLabelInformation infomationLabel;
+    IphoneLabelInformation informationLabel;
 
     public ScanButtonPanel(InformationContainerPanel infoContainer, DeviceService deviceService, IphoneModel iphone, IphoneLabelInformation informationLabel) {
         this.infoContainer = infoContainer;
         this.deviceService = deviceService;
         this.iphone = iphone;
-        this.infomationLabel = informationLabel;
+        this.informationLabel = informationLabel;
 
         setOpaque(false);
         setBackground(normalColor);
@@ -125,49 +125,51 @@ public class ScanButtonPanel extends JPanel {
         iphone = deviceService.extractInfo();
 
         // --- EID ---
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.EID.get()), new EidTextField(infomationLabel)));
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.EID.get()), new EidTextField(informationLabel)));
 
         // --- COLOR ---
         if(Constants.IPHONE_8.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_8_PLUS.get().equals(iphone.getProductType())) {
-                colorDropdown = new ColorTypeComboBox(iphone.getIphone8And8PlusColors());
+                colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone8And8PlusColors());
+                colorDropdown.setChoice(informationLabel.getProductColor());
         } else if(Constants.IPHONE_X.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_XS.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_XS_MAX.get().equals(iphone.getProductType())) {
-                colorDropdown = new ColorTypeComboBox(iphone.getIphoneXAndXsAndXsMaxColors());
+                colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphoneXAndXsAndXsMaxColors());
         } else if(Constants.IPHONE_XR.get().equals(iphone.getProductType())) {
-            colorDropdown = new ColorTypeComboBox(iphone.getIphoneXrColors());
+            colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphoneXrColors());
         } else if(Constants.IPHONE_11.get().equals(iphone.getProductType())) {
-            colorDropdown = new ColorTypeComboBox(iphone.getIphone11Colors());
+            colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone11Colors());
         } else if(Constants.IPHONE_11_PRO.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_11_PRO_MAX.get().equals(iphone.getProductType())) {
-                colorDropdown = new ColorTypeComboBox(iphone.getIphone11ProAnd11ProMaxColors());
+                colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone11ProAnd11ProMaxColors());
         } else if(Constants.IPHONE_12.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_12_MINI.get().equals(iphone.getProductType())) {
-                colorDropdown = new ColorTypeComboBox(iphone.getIphone12And12MiniColors());
+                colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone12And12MiniColors());
         } else if(Constants.IPHONE_12_PRO.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_12_PRO_MAX.get().equals(iphone.getProductType())) {
-                colorDropdown = new ColorTypeComboBox(iphone.getIphone12ProAnd12ProMaxColors());
+                colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone12ProAnd12ProMaxColors());
         } else if(Constants.IPHONE_13.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_13_MINI.get().equals(iphone.getProductType())) {
-                colorDropdown = new ColorTypeComboBox(iphone.getIphone13Ad13MiniColors());
+                colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone13Ad13MiniColors());
         } else if(Constants.IPHONE_13_PRO.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_13_PRO_MAX.get().equals(iphone.getProductType())) {
-                colorDropdown = new ColorTypeComboBox(iphone.getIphone13ProAnd13ProMaxColors());
+                colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone13ProAnd13ProMaxColors());
         } else if(Constants.IPHONE_SE.get().equals(iphone.getProductType())) {
-            colorDropdown = new ColorTypeComboBox(iphone.getIphoneSeColors());
+            colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphoneSeColors());
         } else if(Constants.IPHONE_14.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_14_PLUS.get().equals(iphone.getProductType())) {
-                colorDropdown = new ColorTypeComboBox(iphone.getIphone14And14PlusColors());
+                colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone14And14PlusColors());
         } else if(Constants.IPHONE_14_PRO.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_14_PRO_MAX.get().equals(iphone.getProductType())) {
-                colorDropdown = new ColorTypeComboBox(iphone.getIphone14ProAnd14ProMaxColors());
+                colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone14ProAnd14ProMaxColors());
         } else if(Constants.IPHONE_15.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_15_PLUS.get().equals(iphone.getProductType())) {
-                colorDropdown = new ColorTypeComboBox(iphone.getIphone15And15PlusColors());
+                colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone15And15PlusColors());
         } else if(Constants.IPHONE_15_PRO.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_15_PRO_MAX.get().equals(iphone.getProductType())) {
-                colorDropdown = new ColorTypeComboBox(iphone.getIphone15ProAnd15ProMaxColors());
+                colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone15ProAnd15ProMaxColors());
+                colorDropdown.setChoice(informationLabel.getProductColor());
         }
         infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.COLOR_TYPE.get()), colorDropdown));
         

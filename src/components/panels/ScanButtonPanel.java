@@ -200,6 +200,8 @@ public class ScanButtonPanel extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
         Graphics2D g2 = (Graphics2D) g.create();
 
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -214,6 +216,5 @@ public class ScanButtonPanel extends JPanel {
         g2.drawRoundRect(offset, offset, getWidth() - 6, getHeight() - 6, 20, 20);
 
         g2.dispose();
-        super.paintComponent(g);
     }
 }

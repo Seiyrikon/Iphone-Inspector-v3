@@ -25,10 +25,16 @@ public class GenerateButtonPanel extends JPanel {
     private Color normalColor = new Color(56, 57, 58);
     private Color hoverColor = new Color(240, 240, 240);
 
+    InformationContainerPanel infoContainer;
+    IphoneModel iphone;
+
     Size120x80Panel size120x80Button;
     Size20x80Panel size20x80Button;
 
     public GenerateButtonPanel(InformationContainerPanel infoContainer, IphoneModel iphone) {
+        this.infoContainer = infoContainer;
+        this.iphone = iphone;
+
         setOpaque(false);
         setBackground(new Color(56, 57, 58));
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -61,9 +67,9 @@ public class GenerateButtonPanel extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+                pressed = false;
                 System.out.println("Generate Button clicked!");
-                size120x80Button = new Size120x80Panel();
-                size20x80Button = new Size20x80Panel();
+                generateSizeButtons();
             }
 
             @Override
@@ -82,6 +88,8 @@ public class GenerateButtonPanel extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
         Graphics2D g2 = (Graphics2D) g.create();
 
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -96,7 +104,20 @@ public class GenerateButtonPanel extends JPanel {
         g2.drawRoundRect(offset, offset, getWidth() - 6, getHeight() - 6, 20, 20);
 
         g2.dispose();
-        super.paintComponent(g);
+    }
+
+    public void generateSizeButtons() {
+        infoContainer.removeAll();
+        infoContainer.setLayout(new BoxLayout(infoContainer, BoxLayout.Y_AXIS));
+
+        size120x80Button = new Size120x80Panel();
+        size20x80Button = new Size20x80Panel();
+
+        infoContainer.add(size120x80Button);
+        infoContainer.add(size20x80Button);
+
+        infoContainer.revalidate();
+        infoContainer.repaint();
     }
 
 }

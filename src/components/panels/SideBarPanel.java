@@ -34,13 +34,5 @@ public class SideBarPanel extends JPanel{
         printButton = new PrintButtonPanel();
         printButton.setBounds(10, 180, 180, 50);
         add(printButton);
-
-        size120x80Panel = new Size120x80Panel();
-        size120x80Panel.setBounds(10, 260, 180, 50);
-        add(size120x80Panel);
-
-        size20x80Panel = new Size20x80Panel();
-        size20x80Panel.setBounds(10, 340, 180, 50);
-        add(size20x80Panel);
     }
 }

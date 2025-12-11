@@ -7,20 +7,20 @@ import lombok.Setter;
 @Setter
 public class IphoneModel {
     private String uid;
-    private String imei = "Sample imei";
-    private String imei2 = "Sample imei2";
+    private String imei = "";
+    private String imei2 = "";
     private String eid;
-    private String serialNo = "Sample serialNo";
+    private String serialNo = "";
     private String storageType;
-    private String version = "Sample version";
+    private String version = "";
     private String icc;
     private String fcc;
-    private String model = "model";
-    private String region = "region";
-    private String productName = "Sample productName";
-    private String productType = "iPhone16,4";
-    private String productColor = "Sample productColor";
-    private String productVersion = "Sample productVersion";
+    private String model = "";
+    private String region = "";
+    private String productName = "";
+    private String productType = "";
+    private String productColor = "";
+    private String productVersion = "";
 
     private String[] iphone8And8PlusColors = {"Gold", "Red", "Silver", "Space Gray"};
     private String[] iphoneXAndXsAndXsMaxColors = { "Gold", "Silver", "Space Gray"};

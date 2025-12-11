@@ -73,7 +73,8 @@ public enum Constants {
     PDF_120X80("pdf_120x80.pdf"),
     PDF_20X80("pdf_20x80.pdf"),
     
-    EPMTY_STRING("");
+    EPMTY_STRING(""),
+    NA_STRING("N/A");
 
     private final String value;
 

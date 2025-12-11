@@ -183,6 +183,9 @@ public class ScanButtonPanel extends JPanel {
             || Constants.IPHONE_15_PRO_MAX.get().equals(iphone.getProductType())) {
                 colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone15ProAnd15ProMaxColors());
                 colorDropdown.setChoice(informationLabel.getProductColor());
+        } else {
+            colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone8And8PlusColors());
+            colorDropdown.setChoice(informationLabel.getProductColor());
         }
         infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.COLOR_TYPE.get()), colorDropdown));
         
@@ -192,25 +195,32 @@ public class ScanButtonPanel extends JPanel {
         infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.STORAGE_TYPE.get()), storageDropdown));
 
         // --- IMEI ---
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.IMEI.get()), new ImeiLabel(iphone.getImei())));
-
+        informationLabel.setImei(iphone.getImei());
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.IMEI.get()), new ImeiLabel(informationLabel.getImei().isBlank() ? Constants.NA_STRING.get() : informationLabel.getImei())));
+        
         // --- IMEI2 ---
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.IMEI2.get()), new Imei2Label(iphone.getImei2())));
+        informationLabel.setImei2(iphone.getImei2());
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.IMEI2.get()), new Imei2Label(informationLabel.getImei2().isBlank() ? Constants.NA_STRING.get() : informationLabel.getImei2())));
 
         // --- SERIAL NO ---
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.SERIAL_NUMBER.get()), new SerialNoLabel(iphone.getSerialNo())));
+        informationLabel.setSerialNo(iphone.getSerialNo());
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.SERIAL_NUMBER.get()), new SerialNoLabel(informationLabel.getSerialNo().isBlank() ? Constants.NA_STRING.get() : informationLabel.getSerialNo())));
 
         // --- MODEL NO ---
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.MODEL_NUMBER.get()), new ModelNoLabel(iphone.getModel())));
+        informationLabel.setModel(iphone.getModel());
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.MODEL_NUMBER.get()), new ModelNoLabel(informationLabel.getModel().isBlank() ? Constants.NA_STRING.get() : informationLabel.getModel())));
 
         // --- PRODUCT NAME ---
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.PRODUCT_NAME.get()), new ProductNameLabel(iphone.getProductName())));
+        informationLabel.setProductName(iphone.getProductName());
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.PRODUCT_NAME.get()), new ProductNameLabel(informationLabel.getProductName().isBlank() ? Constants.NA_STRING.get() : informationLabel.getProductName())));
 
         // --- PRODUCT TYPE ---
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.PRODUCT_TYPE.get()), new ProductTypeLabel(iphone.getProductType())));
+        informationLabel.setProductType(iphone.getProductType());
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.PRODUCT_TYPE.get()), new ProductTypeLabel(informationLabel.getProductType().isBlank() ? Constants.NA_STRING.get() : informationLabel.getProductType())));
 
         // --- PRODUCT VERSION ---
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.PRODUCT_VERSION.get()), new ProductVersionLabel(iphone.getProductVersion())));
+        informationLabel.setProductVersion(iphone.getProductVersion());
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.PRODUCT_VERSION.get()), new ProductVersionLabel(informationLabel.getProductVersion().isBlank() ? Constants.NA_STRING.get() : informationLabel.getProductVersion())));
 
         infoContainer.revalidate();
         infoContainer.repaint();

@@ -13,30 +13,26 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import components.labels.GenerateButtonIconLabel;
-import components.labels.GenerateButtonTextLabel;
-import model.IphoneModel;
+import components.labels.Size20x80IconLabel;
+import components.labels.Size20x80TextLabel;
 
-public class GenerateButtonPanel extends JPanel {
-    GenerateButtonIconLabel iconLabel;
-    GenerateButtonTextLabel textLabel;
+public class Size20x80Panel extends JPanel {
+    Size20x80IconLabel iconLabel;
+    Size20x80TextLabel textLabel;
 
     private boolean pressed = false;
     private Color normalColor = new Color(56, 57, 58);
     private Color hoverColor = new Color(240, 240, 240);
 
-    Size120x80Panel size120x80Button;
-    Size20x80Panel size20x80Button;
-
-    public GenerateButtonPanel(InformationContainerPanel infoContainer, IphoneModel iphone) {
+    public Size20x80Panel() {
         setOpaque(false);
         setBackground(new Color(56, 57, 58));
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-        iconLabel = new GenerateButtonIconLabel();
-        textLabel = new GenerateButtonTextLabel();
+        iconLabel = new Size20x80IconLabel();
+        textLabel = new Size20x80TextLabel();
 
         add(Box.createHorizontalGlue());
         add(iconLabel);
@@ -61,9 +57,7 @@ public class GenerateButtonPanel extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Generate Button clicked!");
-                size120x80Button = new Size120x80Panel();
-                size20x80Button = new Size20x80Panel();
+                System.out.println("Size 20mm x 80mm Button clicked!");
             }
 
             @Override
@@ -98,5 +92,4 @@ public class GenerateButtonPanel extends JPanel {
         g2.dispose();
         super.paintComponent(g);
     }
-
 }

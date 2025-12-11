@@ -57,7 +57,7 @@ public class Size120x80Panel extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Generate Button clicked!");
+                System.out.println("Size 120mm x 80mm Button clicked!");
             }
 
             @Override

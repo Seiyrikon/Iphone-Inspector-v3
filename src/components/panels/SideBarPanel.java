@@ -13,6 +13,7 @@ public class SideBarPanel extends JPanel{
     GenerateButtonPanel generateButton;
     PrintButtonPanel printButton;
     Size120x80Panel size120x80Panel;
+    Size20x80Panel size20x80Panel;
     IphoneModel iphone;
 
     public SideBarPanel(InformationContainerPanel infoContainer, DeviceService deviceService, IphoneModel iphone) {
@@ -26,7 +27,7 @@ public class SideBarPanel extends JPanel{
         scanButton.setBounds(10, 20, 180, 50);
         add(scanButton);
 
-        generateButton = new GenerateButtonPanel();
+        generateButton = new GenerateButtonPanel(infoContainer, iphone);
         generateButton.setBounds(10, 100, 180, 50);
         add(generateButton);
 
@@ -37,5 +38,9 @@ public class SideBarPanel extends JPanel{
         size120x80Panel = new Size120x80Panel();
         size120x80Panel.setBounds(10, 260, 180, 50);
         add(size120x80Panel);
+
+        size20x80Panel = new Size20x80Panel();
+        size20x80Panel.setBounds(10, 340, 180, 50);
+        add(size20x80Panel);
     }
 }

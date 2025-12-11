@@ -16,6 +16,9 @@ public enum Constants {
     PRINT("Print"),
     PRINT_ICON("/resources/icons/print-icon.png"),
 
+    SIZE120X80("120mm X 80mm"),
+    SIZE_ICON("/resources/icons/size-icon.png"),
+
     IDEVICE_ID("idevice_id.exe"),
     DEVICE_LIST("-l"),
 

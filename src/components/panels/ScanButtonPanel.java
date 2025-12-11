@@ -207,8 +207,8 @@ public class ScanButtonPanel extends JPanel {
         infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.SERIAL_NUMBER.get()), new SerialNoLabel(informationLabel.getSerialNo().isBlank() ? Constants.NA_STRING.get() : informationLabel.getSerialNo())));
 
         // --- MODEL NO ---
-        informationLabel.setModel(iphone.getModel());
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.MODEL_NUMBER.get()), new ModelNoLabel(informationLabel.getModel().isBlank() ? Constants.NA_STRING.get() : informationLabel.getModel())));
+        informationLabel.setModelRegion(iphone.getModel() + iphone.getRegion());
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.MODEL_NUMBER.get()), new ModelNoLabel(informationLabel.getModelRegion().isBlank() ? Constants.NA_STRING.get() : informationLabel.getModelRegion())));
 
         // --- PRODUCT NAME ---
         informationLabel.setProductName(iphone.getProductName());

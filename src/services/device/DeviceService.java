@@ -138,6 +138,7 @@ public class DeviceService {
             }
         }
 
+        //for productType simulation, remove this code for the final version
         if ("iPhone10,1".equals(iphone.getProductType()) 
                     || "iPhone10,4".equals(iphone.getProductType())) {
                     iphone.setProductType(Constants.IPHONE_8.get());
@@ -195,6 +196,7 @@ public class DeviceService {
                 } else if ("iPhone16,4".equals(iphone.getProductType())) {
                     iphone.setProductType(Constants.IPHONE_15_PRO_MAX.get());
                 }
+                //for productType simulation, remove this code for the final version
 
         return iphone;
     }

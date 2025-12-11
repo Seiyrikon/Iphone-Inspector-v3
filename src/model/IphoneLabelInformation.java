@@ -10,8 +10,7 @@ public class IphoneLabelInformation {
     private String serialNo = "";
     private String storageType = "";
     private String version = "";
-    private String model = "";
-    private String region = "";
+    private String modelRegion = "";
     private String productName = "";
     private String productType = "";
     private String productColor = "";

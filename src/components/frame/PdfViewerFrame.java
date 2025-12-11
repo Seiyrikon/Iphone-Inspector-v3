@@ -25,7 +25,5 @@ public class PdfViewerFrame extends JFrame{
 
         setLayout(new BorderLayout());
         add(viewerPanel, BorderLayout.CENTER);
-
-        setSize(800, 700);
     }
 }

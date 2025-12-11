@@ -102,6 +102,7 @@ public class Size20x80Panel extends JPanel {
 
     private void viewPdf() {
         pdfViewer.is120x80 = false;
+        pdfViewer.setSize(600, 400);
         pdfViewer.setVisible(true);
         pdfViewer.controller.openDocument(Constants.PDF_PATH.get() + Constants.PDF_20X80.get());
     }

@@ -74,7 +74,16 @@ public enum Constants {
     PDF_20X80("pdf_20x80.pdf"),
     
     EPMTY_STRING(""),
-    NA_STRING("N/A");
+    NA_STRING("N/A"),
+    
+    STRING_ZPL2PDF("ZPL2PDF.exe"),
+    STRING_ZPL_I("-i"),
+    STRING_ZPL_O("-o"),
+    STRING_ZPL_N("-n"),
+    STRING_ZPL_Z("-z"),
+
+    STRING_DOT_PDF(".pdf"),
+    OUTPUT_FOLDER("src/resources/pdf/");
 
     private final String value;
 

@@ -19,8 +19,10 @@ import com.zebra.sdk.printer.ZebraPrinterFactory;
 import com.zebra.sdk.printer.discovery.DiscoveredUsbPrinter;
 import com.zebra.sdk.printer.discovery.UsbDiscoverer;
 
+import components.frame.PdfViewerFrame;
 import components.labels.PrintButtonIconLabel;
 import components.labels.PrintButtonTextLabel;
+import model.IphoneLabelInformation;
 
 public class PrintButtonPanel extends JPanel {
     PrintButtonIconLabel iconLabel;
@@ -30,7 +32,11 @@ public class PrintButtonPanel extends JPanel {
     private Color normalColor = new Color(56, 57, 58);
     private Color hoverColor = new Color(240, 240, 240);
 
-    public PrintButtonPanel() {
+    IphoneLabelInformation informationLabel;
+
+    public PrintButtonPanel(PdfViewerFrame pdfViewer, IphoneLabelInformation informationLabel) {
+        this.informationLabel = informationLabel;
+        
         setOpaque(false);
         setBackground(new Color(56, 57, 58));
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -66,7 +72,7 @@ public class PrintButtonPanel extends JPanel {
                 System.out.println("Print Button clicked!");
 
                 try {
-                    printTestLabel();
+                    printLabel();
                     System.out.println("Print sent!");
                 } catch (Exception err) {
                     err.printStackTrace();
@@ -88,32 +94,8 @@ public class PrintButtonPanel extends JPanel {
         });
     }
 
-    private boolean isZplMode(Connection conn) {
-        try {
-            // ask printer to describe itself
-            conn.write("~HI".getBytes());
+    public void printLabel() throws Exception {
 
-            // wait a little for response
-            Thread.sleep(300);
-
-            // read identification string
-            byte[] response = conn.read();
-            if (response == null)
-                return false;
-
-            String info = new String(response);
-
-            // ZPL printers always include "ZPL" in the ~HI response
-            return info.contains("ZPL");
-
-        } catch (Exception e) {
-            return false; // no response → not ZPL
-        }
-    }
-
-    public void printTestLabel() throws Exception {
-
-        // ----------- 1. FIND USB PRINTER -------------
         DiscoveredUsbPrinter usbPrinter = null;
         for (DiscoveredUsbPrinter p : UsbDiscoverer.getZebraUsbPrinters()) {
             usbPrinter = p;
@@ -123,53 +105,35 @@ public class PrintButtonPanel extends JPanel {
         if (usbPrinter == null) {
             throw new Exception("No Zebra USB printer detected.");
         }
-
-        // ----------- 2. CONNECT TO PRINTER ------------
+        
         Connection conn = usbPrinter.getConnection();
         conn.open();
 
-        // ----------- 3. CHECK IF PRINTER IS IN ZPL MODE ------------
-        // if (!isZplMode(conn)) {
-        //     conn.close();
-        //     throw new Exception("Printer is NOT in ZPL mode. Switch printer language to ZPL.");
-        // }
-
-        // // ----------- 4. SEND ZPL IF OK ----------------
-        // String zpl = "^XA^FO50,50^ADN,36,20^FDHELLO ZEBRA^FS^XZ";
         PrinterLanguage printerLanguage = ZebraPrinterFactory.getInstance(conn).getPrinterControlLanguage();
         conn.write(getConfigLabel(printerLanguage));
 
-
-
-        // conn.close();
+        conn.close();
     }
 
     private byte[] getConfigLabel(PrinterLanguage printerLanguage) {
 
-    /*
-     * Returns the command for a test label depending on the printer control language
-     * The test label is a box with the word "TEST" inside of it
-     * 
-     * _________________________
-     * |                       |
-     * |                       |
-     * |        TEST           |
-     * |                       |
-     * |                       |
-     * |_______________________|
-     * 
-     * 
-     */
-
-
         byte[] configLabel = null;
         if (printerLanguage == PrinterLanguage.ZPL) {
-            configLabel = "^XA^FT65,255^A0N,20,40^^BY3^BCN,80,Y,N,N^FDFFXDD20N0F0X^FS^XZ".getBytes();
-            // configLabel = "^XA^CF0,30^FO50,30^FD123456789012^FS^FO50,60^BCN,100,Y,N,N^FD123456789012^FS".getBytes();
-        } else if ((printerLanguage == PrinterLanguage.CPCL) || (printerLanguage == PrinterLanguage.LINE_PRINT)) {
-            String cpclConfigLabel = "! 0 200 200 406 1\r\n" + "ON-FEED IGNORE\r\n" + "BOX 20 20 380 380 8\r\n"
-                    + "T 0 6 137 177 TEST\r\n" + "PRINT\r\n";
-            configLabel = cpclConfigLabel.getBytes();
+            // configLabel = "^XA^FT65,255^A0N,20,40^^BY3^BCN,80,Y,N,N^FDFFXDD20N0F0X^FS^XZ".getBytes();
+            // String zplLabel = "^XA^MMT^PW945^LL1417^LS0^BY2,3,24^FT33,1184^BCN,,N,N^FD>;" + informationLabel.getEid().toString() + "^FS^BY2,3,24^FT33,1235^BCN,,N,N^FD>:" + informationLabel.getSerialNo() + "^FS^BY2,3,24^FT33,1287^BCN,,N,N^FD>;" + informationLabel.getImei() + "^FS^BY2,2,24^FT720,1176^BUN,,Y,N^FD19425337371^FS^BY2,3,24^FT605,1235^BCN,,N,N^FD>;" + informationLabel.getImei2() + "^FS^FT33,1157^A0N,17,16^FH\\^FDEID " + informationLabel.getEid() + "^FS^FT33,1207^A0N,17,16^FH\\^FD(S) Serial No. " + informationLabel.getSerialNo() + "^FS^FT33,1261^A0N,17,16^FH\\^FDIMEI/MEID " + informationLabel.getImei() + "^FS^FT686,1166^A0N,17,16^FH\\^FDUPC^FS^FT605,1207^A0N,17,16^FH\\^FDIMEI2 " + informationLabel.getImei2() + "^FS^FT33,1116^A0N,17,16^FH\\^FDOther items as marked thereon Model A2886^FS^FT33,1095^A0N,17,16^FH\\^" + informationLabel.getModelRegion() + " " + informationLabel.getProductType() + ", " + informationLabel.getProductColor() + ", " + informationLabel.getStorageType() + "^FS";
+            String zplLabel = "^XA^MMT^PW945^LL1417^LS0^BY2,3,24^FT33,1184^BCN,,N,N^FD>;"
+                + informationLabel.getEid().toString() + "^FS^BY2,3,24^FT33,1235^BCN,,N,N^FD>:"
+                + informationLabel.getSerialNo() + "^FS^BY2,3,24^FT33,1287^BCN,,N,N^FD>;" + informationLabel.getImei()
+                + "^FS^BY2,2,24^FT720,1176^BUN,,Y,N^FD19425337371^FS^BY2,3,24^FT605,1235^BCN,,N,N^FD>;"
+                + informationLabel.getImei2() + "^FS^FT33,1157^A0N,17,16^FH\\^FDEID " + informationLabel.getEid()
+                + "^FS^FT33,1207^A0N,17,16^FH\\^FD(S) Serial No. " + informationLabel.getSerialNo()
+                + "^FS^FT33,1261^A0N,17,16^FH\\^FDIMEI/MEID " + informationLabel.getImei()
+                + "^FS^FT686,1166^A0N,17,16^FH\\^FDUPC^FS^FT605,1207^A0N,17,16^FH\\^FDIMEI2 "
+                + informationLabel.getImei2()
+                + "^FS^FT33,1116^A0N,17,16^FH\\^FDOther items as marked thereon Model A2886^FS^FT33,1095^A0N,17,16^FH\\^"
+                + informationLabel.getModelRegion() + " " + informationLabel.getProductType() + ", "
+                + informationLabel.getProductColor() + ", " + informationLabel.getStorageType() + "^FS^PQ1,0,1,Y^XZ";
+            configLabel = zplLabel.getBytes();
         }
         return configLabel;
     }

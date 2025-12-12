@@ -37,5 +37,5 @@ public class IphoneModel {
     private String[] iphone15And15PlusColors = {"Black", "Blue", "Green", "Pink", "Yellow"};
     private String[] iphone15ProAnd15ProMaxColors = {"Black Titanium", "Blue Titanium", "Natural Titanium", "White Titanium"};
 
-    private String[] storageTypes = {"64 GB", "128 GB", "256 GB", "512 GB", "1 TB"};
+    private String[] storageTypes = {"64GB", "128GB", "256GB", "512GB", "1TB"};
 }

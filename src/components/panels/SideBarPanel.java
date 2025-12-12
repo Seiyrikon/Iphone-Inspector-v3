@@ -27,11 +27,11 @@ public class SideBarPanel extends JPanel{
         scanButton.setBounds(10, 20, 180, 50);
         add(scanButton);
 
-        generateButton = new GenerateButtonPanel(infoContainer, iphone, pdfViewer);
+        generateButton = new GenerateButtonPanel(infoContainer, iphone, pdfViewer, informationLabel);
         generateButton.setBounds(10, 100, 180, 50);
         add(generateButton);
 
-        printButton = new PrintButtonPanel();
+        printButton = new PrintButtonPanel(pdfViewer, informationLabel);
         printButton.setBounds(10, 180, 180, 50);
         add(printButton);
     }

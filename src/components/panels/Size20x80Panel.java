@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import components.frame.PdfViewerFrame;
 import components.labels.Size20x80IconLabel;
 import components.labels.Size20x80TextLabel;
+import model.IphoneLabelInformation;
 import utils.Constants;
 
 public class Size20x80Panel extends JPanel {
@@ -27,9 +28,11 @@ public class Size20x80Panel extends JPanel {
     private Color hoverColor = new Color(240, 240, 240);
 
     PdfViewerFrame pdfViewer;
+    IphoneLabelInformation informationLabel;
 
-    public Size20x80Panel(PdfViewerFrame pdfViewer) {
+    public Size20x80Panel(PdfViewerFrame pdfViewer, IphoneLabelInformation informationLabel) {
         this.pdfViewer = pdfViewer;
+        this.informationLabel = informationLabel;
 
         setOpaque(false);
         setBackground(new Color(56, 57, 58));

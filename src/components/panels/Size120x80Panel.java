@@ -9,6 +9,9 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -21,6 +24,9 @@ import org.icepdf.ri.common.SwingViewBuilder;
 import components.frame.PdfViewerFrame;
 import components.labels.Size120x80IconLabel;
 import components.labels.Size120x80TextLabel;
+import model.IphoneLabelInformation;
+import utils.CommandExecutor;
+import utils.CommandResult;
 import utils.Constants;
 
 public class Size120x80Panel extends JPanel {
@@ -32,9 +38,11 @@ public class Size120x80Panel extends JPanel {
     private Color hoverColor = new Color(240, 240, 240);
 
     public PdfViewerFrame pdfViewer;
+    IphoneLabelInformation informationLabel;
 
-    public Size120x80Panel(PdfViewerFrame pdfViewer) {
+    public Size120x80Panel(PdfViewerFrame pdfViewer, IphoneLabelInformation informationLabel) {
         this.pdfViewer = pdfViewer;
+        this.informationLabel = informationLabel;
 
         setOpaque(false);
         setBackground(new Color(56, 57, 58));
@@ -106,9 +114,51 @@ public class Size120x80Panel extends JPanel {
     }
 
     private void viewPdf() {
+        String zplLabel = "^XA^MMT^PW945^LL1417^LS0^BY2,3,24^FT33,1184^BCN,,N,N^FD>;"
+                + informationLabel.getEid().toString() + "^FS^BY2,3,24^FT33,1235^BCN,,N,N^FD>:"
+                + informationLabel.getSerialNo() + "^FS^BY2,3,24^FT33,1287^BCN,,N,N^FD>;" + informationLabel.getImei()
+                + "^FS^BY2,2,24^FT720,1176^BUN,,Y,N^FD19425337371^FS^BY2,3,24^FT605,1235^BCN,,N,N^FD>;"
+                + informationLabel.getImei2() + "^FS^FT33,1157^A0N,17,16^FH\\^FDEID " + informationLabel.getEid()
+                + "^FS^FT33,1207^A0N,17,16^FH\\^FD(S) Serial No. " + informationLabel.getSerialNo()
+                + "^FS^FT33,1261^A0N,17,16^FH\\^FDIMEI/MEID " + informationLabel.getImei()
+                + "^FS^FT686,1166^A0N,17,16^FH\\^FDUPC^FS^FT605,1207^A0N,17,16^FH\\^FDIMEI2 "
+                + informationLabel.getImei2()
+                + "^FS^FT33,1116^A0N,17,16^FH\\^FDOther items as marked thereon Model A2886^FS^FT33,1095^A0N,17,16^FH\\^"
+                + informationLabel.getModelRegion() + " " + informationLabel.getProductType() + ", "
+                + informationLabel.getProductColor() + ", " + informationLabel.getStorageType() + "^FS^PQ1,0,1,Y^XZ";
+
+        generatePdf(zplLabel);
         pdfViewer.is120x80 = true;
         pdfViewer.setSize(600, 700);
         pdfViewer.setVisible(true);
-        pdfViewer.controller.openDocument(Constants.PDF_PATH.get() + Constants.PDF_120X80.get());
+        pdfViewer.controller.openDocument("C:/txt/example.pdf");
+    }
+
+    private CommandResult generatePdf(String zplLabel) {
+        try {
+            File dir = new File("C:/txt");
+            if (!dir.exists()) {
+                dir.mkdirs(); // Creates directory if missing
+            }
+
+            FileWriter writer = new FileWriter("C:/txt/example.txt");
+            writer.write(zplLabel);
+            writer.close();
+            System.out.println("File created!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        CommandResult result =
+        CommandExecutor.runTool(Constants.STRING_ZPL2PDF.get(),
+        Constants.STRING_ZPL_I.get(), "C:/txt/example.txt",
+        Constants.STRING_ZPL_O.get(),
+        "C:/txt/", Constants.STRING_ZPL_N.get() +
+        Constants.PDF_120X80.get());
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

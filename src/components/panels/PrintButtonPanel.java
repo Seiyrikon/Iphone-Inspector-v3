@@ -130,10 +130,11 @@ public class PrintButtonPanel extends JPanel {
                 + "^FS^FT33,1261^A0N,17,16^FH\\^FDIMEI/MEID " + informationLabel.getImei()
                 + "^FS^FT686,1166^A0N,17,16^FH\\^FDUPC^FS^FT605,1207^A0N,17,16^FH\\^FDIMEI2 "
                 + informationLabel.getImei2()
-                + "^FS^FT33,1116^A0N,17,16^FH\\^FDOther items as marked thereon Model A2886^FS^FT33,1095^A0N,17,16^FH\\^"
+                + "^FS^FT33,1116^A0N,17,16^FH\\^FDOther items as marked thereon Model A2886^FS^FT33,1095^A0N,17,16^FH\\^FD"
                 + informationLabel.getModelRegion() + " " + informationLabel.getProductType() + ", "
                 + informationLabel.getProductColor() + ", " + informationLabel.getStorageType() + "^FS^PQ1,0,1,Y^XZ";
             configLabel = zplLabel.getBytes();
+
         }
         return configLabel;
     }

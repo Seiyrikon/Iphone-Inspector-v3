@@ -94,12 +94,12 @@ public class PrintButtonPanel extends JPanel {
                 // }
 
                 //Option 1
-                try {
-                    printLabel();
-                } catch (Exception e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
+                // try {
+                //     printLabel();
+                // } catch (Exception e1) {
+                //     // TODO Auto-generated catch block
+                //     e1.printStackTrace();
+                // }
                 //Option 1
 
                 //Option 2

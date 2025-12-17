@@ -19,6 +19,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.Buffer;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -35,12 +37,17 @@ import org.icepdf.ri.common.SwingController;
 import org.icepdf.ri.common.SwingViewBuilder;
 
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.oned.Code128Writer;
+import com.zebra.sdk.graphics.ZebraImageFactory;
 
 import components.frame.PdfViewerFrame;
 import components.labels.Size120x80IconLabel;
 import components.labels.Size120x80TextLabel;
+import fr.w3blog.zpl.model.ZebraLabel;
 import model.IphoneLabelInformation;
 import utils.CommandExecutor;
 import utils.CommandResult;
@@ -284,7 +291,7 @@ public class Size120x80Panel extends JPanel {
 
         try {
             drawText(cs, font, 4,
-                    565, 1266,
+                    565, 1260,
                     "UPC",
                     height);
         } catch (Exception e) {
@@ -336,8 +343,7 @@ public class Size120x80Panel extends JPanel {
             drawBarcode(
                     cs, doc,
                     "89049032007008882600086562427831",
-                    44, 1262,
-                    height);
+                    height, 11, 38);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -347,8 +353,39 @@ public class Size120x80Panel extends JPanel {
         try {
             drawBarcode(
                     cs, doc,
-                    "35282448939503",
-                    44, 1314,
+                    "YW1J40M992",
+                    height, 11, 25);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        /* -------- BARCODE 3 -------- */
+        try {
+            drawBarcode(
+                    cs, doc,
+                    "357140952882770",
+                    height, 11, 13, 1.2f);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        /* -------- UPC A -------- */
+        try {
+            drawUpcABarcode(
+                    cs, doc,
+                    "019425705186",
+                    height, 145, 32);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        try {
+            drawText(cs, font, 4,
+                    640, 1300,
+                    "019425705186",
                     height);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -408,38 +445,101 @@ public class Size120x80Panel extends JPanel {
     private void drawBarcode(PDPageContentStream cs,
             PDDocument doc,
             String data,
-            float xDot,
-            float yDot,
-            float pageHeight) throws Exception {
-
-        int barcodeWidth = mmToDots(0.17f);
-        int barcodeHeight = mmToDots(2.20f);
+            float pageHeight, int imageXPosition, int imageYPosition) throws Exception {
 
         Code128Writer writer = new Code128Writer();
+        Map<EncodeHintType, Object> hints = new HashMap<>();
+        hints.put(EncodeHintType.MARGIN, 0);
+
         BitMatrix matrix = writer.encode(
-                data, BarcodeFormat.CODE_128, data.length() * 11, barcodeHeight);
+                data,
+                BarcodeFormat.CODE_128,
+                1,
+                1,
+                hints);
 
-        int scaledWidth = matrix.getWidth() * barcodeWidth;
-        int scaledHeight = matrix.getHeight();
+        BufferedImage img = MatrixToImageWriter.toBufferedImage(matrix);
 
-        BufferedImage img = new BufferedImage(
-                scaledWidth,
-                scaledHeight,
-                BufferedImage.TYPE_BYTE_BINARY);
+        float moduleWidthMm = 0.17f;
+        float barHeightMm = 2.20f;
 
-        for (int x = 0; x < matrix.getWidth(); x++) {
-            for (int y = 0; y < matrix.getHeight(); y++) {
-                int color = matrix.get(x, y) ? 0x000000 : 0xFFFFFF;
-
-                for (int dx = 0; dx < barcodeWidth; dx++) {
-                    img.setRGB(x * barcodeWidth + dx, y, color);
-                }
-            }
-        }
+        float barcodeWidthMm = matrix.getWidth() * moduleWidthMm;
 
         cs.drawImage(
                 LosslessFactory.createFromImage(doc, img),
-                dotToPt(xDot),
-                pageHeight - dotToPt(yDot) - dotToPt(scaledHeight));
+                imageXPosition,
+                imageYPosition,
+                mmToPt(barcodeWidthMm),
+                mmToPt(barHeightMm));
+    }
+
+    private void drawBarcode(PDPageContentStream cs,
+            PDDocument doc,
+            String data,
+            float pageHeight, int imageXPosition, int imageYPosition, float dots) throws Exception {
+
+        Code128Writer writer = new Code128Writer();
+        Map<EncodeHintType, Object> hints = new HashMap<>();
+        hints.put(EncodeHintType.MARGIN, 0);
+
+        BitMatrix matrix = writer.encode(
+                data,
+                BarcodeFormat.CODE_128,
+                1,
+                1,
+                hints);
+
+        BufferedImage img = MatrixToImageWriter.toBufferedImage(matrix);
+
+        float baseModuleMm = 0.17f;
+        float barHeightMm = 2.20f;
+
+        float moduleWidthMm = baseModuleMm * dots;
+
+        float barcodeWidthMm = matrix.getWidth() * moduleWidthMm;
+
+        cs.drawImage(
+                LosslessFactory.createFromImage(doc, img),
+                imageXPosition,
+                imageYPosition,
+                mmToPt(barcodeWidthMm),
+                mmToPt(barHeightMm));
+    }
+
+    private void drawUpcABarcode(PDPageContentStream cs,
+            PDDocument doc,
+            String data,
+            float pageHeight, int imageXPosition, int imageYPosition) throws Exception {
+
+        if (!data.matches("\\d{12}")) {
+            throw new IllegalArgumentException("UPC-A must be exactly 12 digits");
+        }
+
+        // String ean13 = "0" + data;
+
+        // Code128Writer writer = new Code128Writer();
+        Map<EncodeHintType, Object> hints = new HashMap<>();
+        hints.put(EncodeHintType.MARGIN, 0);
+
+        BitMatrix matrix = new MultiFormatWriter().encode(
+                data,
+                BarcodeFormat.UPC_A,
+                1,
+                1,
+                hints);
+
+        BufferedImage img = MatrixToImageWriter.toBufferedImage(matrix);
+
+        float moduleWidthMm = 0.17f;
+        float barHeightMm = 3.30f;
+
+        float barcodeWidthMm = matrix.getWidth() * moduleWidthMm;
+
+        cs.drawImage(
+                LosslessFactory.createFromImage(doc, img),
+                imageXPosition,
+                imageYPosition,
+                mmToPt(barcodeWidthMm),
+                mmToPt(barHeightMm));
     }
 }

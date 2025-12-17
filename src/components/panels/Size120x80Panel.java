@@ -22,6 +22,7 @@ import java.nio.Buffer;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -33,6 +34,8 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.apache.pdfbox.pdmodel.graphics.image.LosslessFactory;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+import org.apache.pdfbox.rendering.PDFRenderer;
 import org.icepdf.ri.common.SwingController;
 import org.icepdf.ri.common.SwingViewBuilder;
 
@@ -49,6 +52,7 @@ import components.labels.Size120x80IconLabel;
 import components.labels.Size120x80TextLabel;
 import fr.w3blog.zpl.model.ZebraLabel;
 import model.IphoneLabelInformation;
+import model.PdfDocument;
 import utils.CommandExecutor;
 import utils.CommandResult;
 import utils.Constants;
@@ -63,10 +67,12 @@ public class Size120x80Panel extends JPanel {
 
     public PdfViewerFrame pdfViewer;
     IphoneLabelInformation informationLabel;
+    PdfDocument pdf;
 
-    public Size120x80Panel(PdfViewerFrame pdfViewer, IphoneLabelInformation informationLabel) {
+    public Size120x80Panel(PdfViewerFrame pdfViewer, IphoneLabelInformation informationLabel, PdfDocument pdf) {
         this.pdfViewer = pdfViewer;
         this.informationLabel = informationLabel;
+        this.pdf = pdf;
 
         setOpaque(false);
         setBackground(new Color(56, 57, 58));
@@ -101,7 +107,8 @@ public class Size120x80Panel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("Size 120mm x 80mm Button clicked!");
-                generatePdf();
+                // generatePdf();
+                viewPdf();
             }
 
             @Override
@@ -138,81 +145,96 @@ public class Size120x80Panel extends JPanel {
     }
 
     private void viewPdf() {
-        // String zplLabel = "^XA^MMT^PW945^LL1417^LS0^BY2,3,24^FT33,1184^BCN,,N,N^FD>;"
-        // + informationLabel.getEid().toString() +
-        // "^FS^BY2,3,24^FT33,1235^BCN,,N,N^FD>:"
-        // + informationLabel.getSerialNo() + "^FS^BY2,3,24^FT33,1287^BCN,,N,N^FD>;" +
-        // informationLabel.getImei()
-        // +
-        // "^FS^BY2,2,24^FT720,1176^BUN,,Y,N^FD19425337371^FS^BY2,3,24^FT605,1235^BCN,,N,N^FD>;"
-        // + informationLabel.getImei2() + "^FS^FT33,1157^A0N,17,16^FH\\^FDEID " +
-        // informationLabel.getEid()
-        // + "^FS^FT33,1207^A0N,17,16^FH\\^FD(S) Serial No. " +
-        // informationLabel.getSerialNo()
-        // + "^FS^FT33,1261^A0N,17,16^FH\\^FDIMEI/MEID " + informationLabel.getImei()
-        // + "^FS^FT686,1166^A0N,17,16^FH\\^FDUPC^FS^FT605,1207^A0N,17,16^FH\\^FDIMEI2 "
-        // + informationLabel.getImei2()
-        // +
-        // "^FS^FT259,371^A@N,174,174,85620388.TTF^FH\\^CI28^FDText^FS^CI27FT33,1116^A0N,17,16^FH\\^FDOther
-        // items as marked thereon Model A2886^FS^FT33,1095^A0N,17,16^FH\\^FD"
-        // + informationLabel.getModelRegion() + " " + informationLabel.getProductType()
-        // + ", "
-        // + informationLabel.getProductColor() + ", " +
-        // informationLabel.getStorageType() + "^FS^PQ1,0,1,Y^XZ";
+        //Option 1
+        String zplLabel = "^XA^MMT^PW945^LL1417^LS0^BY2,3,24^FT33,1184^BCN,,N,N^FD>;"
+        + informationLabel.getEid().toString() +
+        "^FS^BY2,3,24^FT33,1235^BCN,,N,N^FD>:"
+        + informationLabel.getSerialNo() + "^FS^BY2,3,24^FT33,1287^BCN,,N,N^FD>;" +
+        informationLabel.getImei()
+        +
+        "^FS^BY2,2,24^FT720,1176^BUN,,Y,N^FD19425337371^FS^BY2,3,24^FT605,1235^BCN,,N,N^FD>;"
+        + informationLabel.getImei2() + "^FS^FT33,1157^A0N,17,16^FH\\^FDEID " +
+        informationLabel.getEid()
+        + "^FS^FT33,1207^A0N,17,16^FH\\^FD(S) Serial No. " +
+        informationLabel.getSerialNo()
+        + "^FS^FT33,1261^A0N,17,16^FH\\^FDIMEI/MEID " + informationLabel.getImei()
+        + "^FS^FT686,1166^A0N,17,16^FH\\^FDUPC^FS^FT605,1207^A0N,17,16^FH\\^FDIMEI2 "
+        + informationLabel.getImei2()
+        + "^FS^FT259,371^A@N,174,174,85620388.TTF^FH\\^CI28^FDText^FS^CI27FT33,1116^A0N,17,16^FH\\^FDOther items as marked thereon Model A2886^FS^FT33,1095^A0N,17,16^FH\\^FD"
+        + informationLabel.getModelRegion() + " " + informationLabel.getProductType()
+        + ", "
+        + informationLabel.getProductColor() + ", " +
+        informationLabel.getStorageType() + "^FS^PQ1,0,1,Y^XZ";
+        generatePdf(zplLabel);
+        //Option 1
 
-        // String zplLabel = "^XA\r\n" + //
-        // "~TA000\r\n" + //
-        // "~JSN\r\n" + //
-        // "^LT0\r\n" + //
-        // "^MNW\r\n" + //
-        // "^MTT\r\n" + //
-        // "^PON\r\n" + //
-        // "^PMN\r\n" + //
-        // "^LH0,0\r\n" + //
-        // "^JMA\r\n" + //
-        // "^PR2,2\r\n" + //
-        // "~SD25\r\n" + //
-        // "^JUS\r\n" + //
-        // "^LRN\r\n" + //
-        // "^CI27\r\n" + //
-        // "^PA0,1,1,0\r\n" + //
-        // "^XZ\r\n" + //
-        // "^XA\r\n" + //
-        // "^MMT\r\n" + //
-        // "^PW945\r\n" + //
-        // "^LL1417\r\n" + //
-        // "^LS0\r\n" + //
-        // "^BY5,3,189^FT239,710^BCN,,Y,N\r\n" + //
-        // "^FH\\^FD>;123456789012^FS\r\n" + //
-        // "^FT259,371^A@N,174,174,85620388.TTF^FH\\^CI28^FDText^FS^CI27\r\n" + //
-        // "^FT259,1033^A0N,174,221^FH\\^CI28^FDText^FS^CI27\r\n" + //
-        // "^LRY^FO171,835^GB630,0,332^FS\r\n" + //
-        // "^LRN\r\n" + //
-        // "^PQ1,0,1,Y\r\n" + //
-        // "^XZ";
-
-        String zplLabel = "";
-        generatePdf();
+        //Option 2
+        // generatePdfImage();
+        //Option 2
+        
         pdfViewer.is120x80 = true;
         pdfViewer.setSize(600, 700);
         pdfViewer.setVisible(true);
         pdfViewer.controller.openDocument("C:/txt/example.pdf");
     }
 
-    private void generatePdf() {
-        // try {
-        // File dir = new File("C:/txt");
-        // if (!dir.exists()) {
-        // dir.mkdirs(); // Creates directory if missing
-        // }
+    private void generatePdf(String zplLabel) {
+        try {
+            File dir = new File("C:/txt");
+            if (!dir.exists()) {
+                dir.mkdirs(); // Creates directory if missing
+            }
+            System.out.println("File created!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        // FileWriter writer = new FileWriter("C:/txt/example.txt");
-        // writer.write(zplLabel);
-        // writer.close();
-        // System.out.println("File created!");
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // }
+        File pdfFile = new File("C:/txt/example.pdf");
+        pdfFile.delete();
+
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter("C:/txt/example.txt");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        try {
+            writer.write(zplLabel);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        try {
+            writer.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        CommandResult result = CommandExecutor.runTool(Constants.STRING_ZPL2PDF.get(),
+                Constants.STRING_ZPL_I.get(), "C:/txt/example.txt",
+                Constants.STRING_ZPL_O.get(),
+                "C:/txt/", Constants.STRING_ZPL_N.get() +
+                        Constants.PDF_120X80.get());
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // return result;
+    }
+
+    private void generatePdfImage() {
+        try {
+            File dir = new File("C:/txt");
+            if (!dir.exists()) {
+                dir.mkdirs(); // Creates directory if missing
+            }
+            System.out.println("File created!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // CommandResult result =
         // CommandExecutor.runTool(Constants.STRING_ZPL2PDF.get(),
         // Constants.STRING_ZPL_I.get(), "C:/txt/example.txt",
@@ -252,7 +274,7 @@ public class Size120x80Panel extends JPanel {
         try {
             drawText(cs, font, 4,
                     44, 1229,
-                    "EID 89049032007008882600086562427831",
+                    "EID " + informationLabel.getEid(),
                     height);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -262,7 +284,7 @@ public class Size120x80Panel extends JPanel {
         try {
             drawText(cs, font, 4,
                     44, 1280,
-                    "(S) Serial No. YW1J40M992",
+                    "(S) Serial No. " + informationLabel.getSerialNo(),
                     height);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -272,27 +294,7 @@ public class Size120x80Panel extends JPanel {
         try {
             drawText(cs, font, 4,
                     44, 1333,
-                    "IMEI/MEID 357140962882770",
-                    height);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        try {
-            drawText(cs, font, 4,
-                    581, 1324,
-                    "IMEI2 357140952066630",
-                    height);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        try {
-            drawText(cs, font, 4,
-                    565, 1260,
-                    "UPC",
+                    "IMEI/MEID " + informationLabel.getImei(),
                     height);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -302,7 +304,8 @@ public class Size120x80Panel extends JPanel {
         try {
             drawText(cs, font, 4,
                     44, 1154,
-                    "MNGK3ZD/A iPhone 13, Green, 128GB",
+                    informationLabel.getModelRegion() + " " + informationLabel.getProductType() + ", "
+                            + informationLabel.getProductColor() + ", " + informationLabel.getStorageType(),
                     height);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -330,6 +333,14 @@ public class Size120x80Panel extends JPanel {
         }
 
         try {
+            drawFccLogo(cs, doc,
+                    30, 73);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        try {
             drawText(cs, font, 4,
                     211, 1098,
                     "IC: 579C-E4000A",
@@ -342,7 +353,7 @@ public class Size120x80Panel extends JPanel {
         try {
             drawBarcode(
                     cs, doc,
-                    "89049032007008882600086562427831",
+                    informationLabel.getEid(),
                     height, 11, 38);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -353,7 +364,7 @@ public class Size120x80Panel extends JPanel {
         try {
             drawBarcode(
                     cs, doc,
-                    "YW1J40M992",
+                    informationLabel.getSerialNo(),
                     height, 11, 25);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -364,7 +375,7 @@ public class Size120x80Panel extends JPanel {
         try {
             drawBarcode(
                     cs, doc,
-                    "357140952882770",
+                    informationLabel.getImei(),
                     height, 11, 13, 1.2f);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -374,9 +385,7 @@ public class Size120x80Panel extends JPanel {
         /* -------- UPC A -------- */
         try {
             drawUpcABarcode(
-                    cs, doc,
-                    "019425705186",
-                    height, 145, 32);
+                    cs, doc, 142, 27);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -384,13 +393,48 @@ public class Size120x80Panel extends JPanel {
 
         try {
             drawText(cs, font, 4,
-                    640, 1300,
-                    "019425705186",
+                    565, 1260,
+                    "UPC",
                     height);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+        // informationLabel.setImei2("abcd");
+
+        if (informationLabel.getImei2().equals("N/A") || !informationLabel.getImei2().isBlank()) {
+
+            try {
+                drawText(cs, font, 4,
+                        581, 1324,
+                        "IMEI2 " + informationLabel.getImei2(),
+                        height);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            try {
+                drawBarcode(
+                        cs, doc,
+                        informationLabel.getImei2(),
+                        height, 140, 15, 1.2f);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+        // try {
+        // drawText(cs, font, 4,
+        // 640, 1300,
+        // "019425705186",
+        // height);
+        // } catch (Exception e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // }
 
         try {
             cs.close();
@@ -399,8 +443,20 @@ public class Size120x80Panel extends JPanel {
             e.printStackTrace();
         }
         try {
-            doc.save("label.pdf");
-        } catch (IOException e) {
+            File pngFile = new File("C:/images/rendered.png");
+            File pdfFile = new File("C:/txt/example.pdf");
+
+            pngFile.delete();
+            pdfFile.delete();
+
+            doc.save("C:/txt/example.pdf");
+            pdf.setPdf(doc);
+            PDFRenderer renderer = new PDFRenderer(doc);
+            BufferedImage image = renderer.renderImageWithDPI(0, 300f);
+            File outputFile = new File("C:/images/rendered.png");
+            ImageIO.write(image, "PNG", outputFile);
+            System.out.println("Doc has been set");
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -508,38 +564,28 @@ public class Size120x80Panel extends JPanel {
 
     private void drawUpcABarcode(PDPageContentStream cs,
             PDDocument doc,
-            String data,
-            float pageHeight, int imageXPosition, int imageYPosition) throws Exception {
+            int imageXPosition, int imageYPosition) throws Exception {
 
-        if (!data.matches("\\d{12}")) {
-            throw new IllegalArgumentException("UPC-A must be exactly 12 digits");
-        }
+        PDImageXObject img = PDImageXObject.createFromFile(
+                "C:/images/upc_barcode.png",
+                doc);
 
-        // String ean13 = "0" + data;
-
-        // Code128Writer writer = new Code128Writer();
-        Map<EncodeHintType, Object> hints = new HashMap<>();
-        hints.put(EncodeHintType.MARGIN, 0);
-
-        BitMatrix matrix = new MultiFormatWriter().encode(
-                data,
-                BarcodeFormat.UPC_A,
-                1,
-                1,
-                hints);
-
-        BufferedImage img = MatrixToImageWriter.toBufferedImage(matrix);
-
-        float moduleWidthMm = 0.17f;
-        float barHeightMm = 3.30f;
-
-        float barcodeWidthMm = matrix.getWidth() * moduleWidthMm;
-
-        cs.drawImage(
-                LosslessFactory.createFromImage(doc, img),
-                imageXPosition,
+        cs.drawImage(img, imageXPosition,
                 imageYPosition,
-                mmToPt(barcodeWidthMm),
-                mmToPt(barHeightMm));
+                mmToPt(27),
+                mmToPt(5));
+    }
+
+    private void drawFccLogo(PDPageContentStream cs,
+            PDDocument doc, int imageXPosition, int imageYPosition) throws Exception {
+
+        PDImageXObject img = PDImageXObject.createFromFile(
+                "C:/images/fcc_logo.png",
+                doc);
+
+        cs.drawImage(img, imageXPosition,
+                imageYPosition,
+                mmToPt(5),
+                mmToPt(5));
     }
 }

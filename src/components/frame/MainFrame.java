@@ -13,6 +13,7 @@ import components.panels.SideBarPanel;
 import components.panels.TitleBarPanel;
 import model.IphoneLabelInformation;
 import model.IphoneModel;
+import model.PdfDocument;
 import services.device.DeviceService;
 
 public class MainFrame extends JFrame {
@@ -24,6 +25,7 @@ public class MainFrame extends JFrame {
     IphoneModel iphone;
     PdfViewerFrame pdfViewer;
     IphoneLabelInformation informationLabel;
+    PdfDocument pdf;
 
     public MainFrame() {
         DeviceService deviceService = new DeviceService(null);
@@ -48,7 +50,9 @@ public class MainFrame extends JFrame {
 
         informationLabel = new IphoneLabelInformation();
 
-        sideBar = new SideBarPanel(infoContainer, deviceService, iphone, pdfViewer, informationLabel);
+        pdf = new PdfDocument();
+
+        sideBar = new SideBarPanel(infoContainer, deviceService, iphone, pdfViewer, informationLabel, pdf);
 
         setContentPane(mainPanel);
 

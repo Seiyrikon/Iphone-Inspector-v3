@@ -18,6 +18,7 @@ import components.labels.GenerateButtonIconLabel;
 import components.labels.GenerateButtonTextLabel;
 import model.IphoneLabelInformation;
 import model.IphoneModel;
+import model.PdfDocument;
 
 public class GenerateButtonPanel extends JPanel {
     GenerateButtonIconLabel iconLabel;
@@ -37,11 +38,14 @@ public class GenerateButtonPanel extends JPanel {
 
     IphoneLabelInformation informationLabel;
 
-    public GenerateButtonPanel(InformationContainerPanel infoContainer, IphoneModel iphone, PdfViewerFrame pdfViewer, IphoneLabelInformation informationLabel) {
+    PdfDocument pdf;
+
+    public GenerateButtonPanel(InformationContainerPanel infoContainer, IphoneModel iphone, PdfViewerFrame pdfViewer, IphoneLabelInformation informationLabel, PdfDocument pdf) {
         this.infoContainer = infoContainer;
         this.iphone = iphone;
         this.pdfViewer = pdfViewer;
         this.informationLabel = informationLabel;
+        this.pdf = pdf;
 
         setOpaque(false);
         setBackground(new Color(56, 57, 58));
@@ -118,7 +122,7 @@ public class GenerateButtonPanel extends JPanel {
         infoContainer.removeAll();
         infoContainer.setLayout(new BoxLayout(infoContainer, BoxLayout.Y_AXIS));
 
-        size120x80Button = new Size120x80Panel(pdfViewer, informationLabel);
+        size120x80Button = new Size120x80Panel(pdfViewer, informationLabel, pdf);
         size20x80Button = new Size20x80Panel(pdfViewer, informationLabel);
 
         infoContainer.add(size120x80Button);

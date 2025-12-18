@@ -18,7 +18,9 @@ public enum Constants {
 
     SIZE120X80("120mm X 80mm"),
     SIZE20X80("30mm X 90mm"),
+    SIZE20X80_BLACK("30mm X 90mm Black"),
     SIZE_ICON("/resources/icons/size-icon.png"),
+    SIZE_ICON_BlACK("/resources/icons/size-icon-black.png"),
 
     IDEVICE_ID("idevice_id.exe"),
     DEVICE_LIST("-l"),

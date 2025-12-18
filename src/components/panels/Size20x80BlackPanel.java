@@ -47,7 +47,7 @@ import model.IphoneLabelInformation;
 
 public class Size20x80BlackPanel extends JPanel {
     Size20x80BlackIconLabel iconLabel;
-    Size20x80BlackTextLabel textLabel;
+    Size20x80TextLabel textLabel;
 
     private boolean pressed = false;
     private Color normalColor = new Color(56, 57, 58);
@@ -67,7 +67,7 @@ public class Size20x80BlackPanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
         iconLabel = new Size20x80BlackIconLabel();
-        textLabel = new Size20x80BlackTextLabel();
+        textLabel = new Size20x80TextLabel();
 
         add(Box.createHorizontalGlue());
         add(iconLabel);
@@ -93,6 +93,7 @@ public class Size20x80BlackPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("Size 20mm x 80mm Black Button clicked!");
+                informationLabel.set120x80(false);
                 viewPdf();
             }
 

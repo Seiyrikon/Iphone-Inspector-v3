@@ -40,6 +40,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.oned.Code128Writer;
 
 import components.frame.PdfViewerFrame;
+import components.labels.Size120x80BlackIconLabel;
 import components.labels.Size120x80IconLabel;
 import components.labels.Size120x80TextLabel;
 import model.IphoneLabelInformation;
@@ -49,7 +50,7 @@ import utils.CommandResult;
 import utils.Constants;
 
 public class Size120x80BlackPanel extends JPanel {
-    Size120x80IconLabel iconLabel;
+    Size120x80BlackIconLabel iconLabel;
     Size120x80TextLabel textLabel;
 
     private boolean pressed = false;
@@ -71,7 +72,7 @@ public class Size120x80BlackPanel extends JPanel {
 
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-        iconLabel = new Size120x80IconLabel();
+        iconLabel = new Size120x80BlackIconLabel();
         textLabel = new Size120x80TextLabel();
 
         add(Box.createHorizontalGlue());
@@ -97,8 +98,9 @@ public class Size120x80BlackPanel extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Size 120mm x 80mm Button clicked!");
+                System.out.println("Size 120mm x 80mm Black Button clicked!");
                 // generatePdf();
+                informationLabel.set120x80(true);
                 viewPdf();
             }
 

@@ -92,6 +92,7 @@ public class Size20x80Panel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("Size 20mm x 80mm Button clicked!");
+                informationLabel.set120x80(false);
                 viewPdf();
             }
 

@@ -34,6 +34,7 @@ public class GenerateButtonPanel extends JPanel {
     Size120x80Panel size120x80Button;
     Size20x80Panel size20x80Button;
     Size20x80BlackPanel size20x80BlackButton;
+    Size120x80BlackPanel size120x80BlackButton;
 
     PdfViewerFrame pdfViewer;
 
@@ -124,10 +125,12 @@ public class GenerateButtonPanel extends JPanel {
         infoContainer.setLayout(new BoxLayout(infoContainer, BoxLayout.Y_AXIS));
 
         size120x80Button = new Size120x80Panel(pdfViewer, informationLabel, pdf);
+        size120x80BlackButton = new Size120x80BlackPanel(pdfViewer, informationLabel, pdf);
         size20x80Button = new Size20x80Panel(pdfViewer, informationLabel);
         size20x80BlackButton = new Size20x80BlackPanel(pdfViewer, informationLabel);
 
         infoContainer.add(size120x80Button);
+        infoContainer.add(size120x80BlackButton);
         infoContainer.add(size20x80Button);
         infoContainer.add(size20x80BlackButton);
 

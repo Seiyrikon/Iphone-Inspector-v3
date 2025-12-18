@@ -222,7 +222,7 @@ public class Size120x80Panel extends JPanel {
         try {
             BufferedImage finalImage = ImageIO.read(new File("C:/images/rendered.png"));
             JFrame frame = new JFrame("Label Preview");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             Image scaled = finalImage.getScaledInstance(400, -1, Image.SCALE_FAST);
 
@@ -335,8 +335,8 @@ public class Size120x80Panel extends JPanel {
         }
 
         try {
-            drawText(cs, font, 4,
-                    44, 1229,
+            drawText(cs, font, 5,
+                    65, 1229,
                     "EID " + informationLabel.getEid(),
                     height);
         } catch (Exception e) {
@@ -345,8 +345,8 @@ public class Size120x80Panel extends JPanel {
         }
 
         try {
-            drawText(cs, font, 4,
-                    44, 1280,
+            drawText(cs, font, 5,
+                    65, 1280,
                     "(S) Serial No. " + informationLabel.getSerialNo(),
                     height);
         } catch (Exception e) {
@@ -355,8 +355,8 @@ public class Size120x80Panel extends JPanel {
         }
 
         try {
-            drawText(cs, font, 4,
-                    44, 1333,
+            drawText(cs, font, 5,
+                    65, 1333,
                     "IMEI/MEID " + informationLabel.getImei(),
                     height);
         } catch (Exception e) {
@@ -365,8 +365,8 @@ public class Size120x80Panel extends JPanel {
         }
 
         try {
-            drawText(cs, font, 4,
-                    44, 1154,
+            drawText(cs, font, 5,
+                    65, 1175,
                     informationLabel.getModelRegion() + " " + informationLabel.getProductType() + ", "
                             + informationLabel.getProductColor() + ", " + informationLabel.getStorageType(),
                     height);
@@ -376,8 +376,8 @@ public class Size120x80Panel extends JPanel {
         }
 
         try {
-            drawText(cs, font, 4,
-                    44, 1175,
+            drawText(cs, font, 5,
+                    65, 1200,
                     "Other items as marked thereon Model A2482",
                     height);
         } catch (Exception e) {
@@ -387,7 +387,7 @@ public class Size120x80Panel extends JPanel {
 
         try {
             drawText(cs, font, 4,
-                    211, 1070,
+                    211, 1093,
                     "FCC ID: BCG-E4000A",
                     height);
         } catch (Exception e) {
@@ -396,8 +396,16 @@ public class Size120x80Panel extends JPanel {
         }
 
         try {
+            drawBcLogo(cs, doc,
+                    15, 67);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        try {
             drawFccLogo(cs, doc,
-                    30, 73);
+                    30, 67);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -405,7 +413,7 @@ public class Size120x80Panel extends JPanel {
 
         try {
             drawText(cs, font, 4,
-                    211, 1098,
+                    211, 1118,
                     "IC: 579C-E4000A",
                     height);
         } catch (Exception e) {
@@ -417,7 +425,7 @@ public class Size120x80Panel extends JPanel {
             drawBarcode(
                     cs, doc,
                     informationLabel.getEid(),
-                    height, 11, 38);
+                    height, 16, 38);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -428,7 +436,7 @@ public class Size120x80Panel extends JPanel {
             drawBarcode(
                     cs, doc,
                     informationLabel.getSerialNo(),
-                    height, 11, 25);
+                    height, 16, 25);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -439,7 +447,7 @@ public class Size120x80Panel extends JPanel {
             drawBarcode(
                     cs, doc,
                     informationLabel.getImei(),
-                    height, 11, 13, 1.2f);
+                    height, 16, 13, 1.2f);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -448,7 +456,7 @@ public class Size120x80Panel extends JPanel {
         /* -------- UPC A -------- */
         try {
             drawUpcABarcode(
-                    cs, doc, 142, 27);
+                    cs, doc, 152, 27);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -456,7 +464,7 @@ public class Size120x80Panel extends JPanel {
 
         try {
             drawText(cs, font, 4,
-                    565, 1260,
+                    623, 1260,
                     "UPC",
                     height);
         } catch (Exception e) {
@@ -469,8 +477,8 @@ public class Size120x80Panel extends JPanel {
         if (informationLabel.getImei2().equals("N/A") || !informationLabel.getImei2().isBlank()) {
 
             try {
-                drawText(cs, font, 4,
-                        581, 1324,
+                drawText(cs, font, 5,
+                        623, 1325,
                         "IMEI2 " + informationLabel.getImei2(),
                         height);
             } catch (Exception e) {
@@ -482,7 +490,7 @@ public class Size120x80Panel extends JPanel {
                 drawBarcode(
                         cs, doc,
                         informationLabel.getImei2(),
-                        height, 140, 15, 1.2f);
+                        height, 150, 14, 1.2f);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -517,10 +525,10 @@ public class Size120x80Panel extends JPanel {
             PDFRenderer renderer = new PDFRenderer(doc);
             BufferedImage image = renderer.renderImageWithDPI(0, 600f);
             File outputFile = new File("C:/images/rendered.png");
-            // ImageIO.write(image, "PNG", outputFile);
-            BufferedImage bw = binarize(image, 160);
-            BufferedImage inverted = invertImage(bw);
-            ImageIO.write(inverted, "PNG", outputFile);
+            ImageIO.write(image, "PNG", outputFile);
+            // BufferedImage bw = binarize(image, 160);
+            // BufferedImage inverted = invertImage(bw);
+            // ImageIO.write(inverted, "PNG", outputFile);
             System.out.println("Doc has been set");
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -686,4 +694,17 @@ public class Size120x80Panel extends JPanel {
                 mmToPt(5),
                 mmToPt(5));
     }
+
+    private void drawBcLogo(PDPageContentStream cs,
+        PDDocument doc, int imageXPosition, int imageYPosition) throws Exception {
+
+    PDImageXObject img = PDImageXObject.createFromFile(
+            "C:/images/bc_logo.png",
+            doc);
+
+    cs.drawImage(img, imageXPosition,
+            imageYPosition,
+            mmToPt(5),
+            mmToPt(5));
+}
 }

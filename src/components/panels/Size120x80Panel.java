@@ -387,7 +387,7 @@ public class Size120x80Panel extends JPanel {
 
         try {
             drawText(cs, font, 4,
-                    211, 1093,
+                    211, 1100,
                     "FCC ID: BCG-E4000A",
                     height);
         } catch (Exception e) {
@@ -405,7 +405,7 @@ public class Size120x80Panel extends JPanel {
 
         try {
             drawFccLogo(cs, doc,
-                    30, 67);
+                    30, 65);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -413,7 +413,7 @@ public class Size120x80Panel extends JPanel {
 
         try {
             drawText(cs, font, 4,
-                    211, 1118,
+                    211, 1125,
                     "IC: 579C-E4000A",
                     height);
         } catch (Exception e) {
@@ -456,7 +456,7 @@ public class Size120x80Panel extends JPanel {
         /* -------- UPC A -------- */
         try {
             drawUpcABarcode(
-                    cs, doc, 152, 27);
+                    cs, doc, 152, 29);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -464,7 +464,7 @@ public class Size120x80Panel extends JPanel {
 
         try {
             drawText(cs, font, 4,
-                    623, 1260,
+                    623, 1255,
                     "UPC",
                     height);
         } catch (Exception e) {
@@ -691,8 +691,8 @@ public class Size120x80Panel extends JPanel {
 
         cs.drawImage(img, imageXPosition,
                 imageYPosition,
-                mmToPt(5),
-                mmToPt(5));
+                mmToPt(6),
+                mmToPt(7));
     }
 
     private void drawBcLogo(PDPageContentStream cs,

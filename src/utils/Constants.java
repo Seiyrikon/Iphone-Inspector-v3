@@ -17,7 +17,7 @@ public enum Constants {
     PRINT_ICON("/resources/icons/print-icon.png"),
 
     SIZE120X80("120mm X 80mm"),
-    SIZE20X80("20mm X 80mm"),
+    SIZE20X80("30mm X 90mm"),
     SIZE_ICON("/resources/icons/size-icon.png"),
 
     IDEVICE_ID("idevice_id.exe"),

@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -25,7 +26,9 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -208,10 +211,32 @@ public class Size120x80Panel extends JPanel {
         generatePdfImage();
         //Option 2
         
-        pdfViewer.is120x80 = true;
-        pdfViewer.setSize(600, 700);
-        pdfViewer.setVisible(true);
-        pdfViewer.controller.openDocument("C:/txt/example.pdf");
+        //Option 1
+        // pdfViewer.is120x80 = true;
+        // pdfViewer.setSize(600, 700);
+        // pdfViewer.setVisible(true);
+        // pdfViewer.controller.openDocument("C:/txt/example.pdf");
+        //Option 1
+
+        //Option 2
+        try {
+            BufferedImage finalImage = ImageIO.read(new File("C:/images/rendered.png"));
+            JFrame frame = new JFrame("Label Preview");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            Image scaled = finalImage.getScaledInstance(400, -1, Image.SCALE_FAST);
+
+            JLabel label = new JLabel(new ImageIcon(scaled));
+            frame.add(label);
+
+            frame.pack();
+            frame.setVisible(true);
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        //Option 2
     }
 
     private void generatePdf(String zplLabel) {
@@ -490,9 +515,12 @@ public class Size120x80Panel extends JPanel {
             doc.save("C:/txt/example.pdf");
             pdf.setPdf(doc);
             PDFRenderer renderer = new PDFRenderer(doc);
-            BufferedImage image = renderer.renderImageWithDPI(0, 300f);
+            BufferedImage image = renderer.renderImageWithDPI(0, 600f);
             File outputFile = new File("C:/images/rendered.png");
-            ImageIO.write(image, "PNG", outputFile);
+            // ImageIO.write(image, "PNG", outputFile);
+            BufferedImage bw = binarize(image, 160);
+            BufferedImage inverted = invertImage(bw);
+            ImageIO.write(inverted, "PNG", outputFile);
             System.out.println("Doc has been set");
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -505,6 +533,38 @@ public class Size120x80Panel extends JPanel {
             e.printStackTrace();
         }
 
+    }
+
+    private BufferedImage invertImage(BufferedImage image) {
+        BufferedImage inverted = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+
+        for(int y = 0; y < image.getHeight(); y++) {
+            for(int x = 0; x < image.getWidth(); x++) {
+                int rgb = image.getRGB(x, y) & 0xFFFFFF;
+                inverted.setRGB(x, y, rgb == 0x000000 ? 0xFFFFFF : 0x000000);
+            }
+        }
+
+        return inverted;
+    }
+
+    private BufferedImage binarize(BufferedImage src, int threshold) {
+        BufferedImage bw = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+
+        for(int y = 0; y < src.getHeight(); y++) {
+            for(int x = 0; x < src.getWidth(); x++) {
+                int rgb = src.getRGB(x, y);
+                int r = (rgb >> 16) & 0xFF;
+                int g = (rgb >> 8) & 0xFF;
+                int b = rgb & 0xFF;
+
+                int gray = (r + g + b) / 3;
+
+                bw.setRGB(x, y, gray < threshold ? 0x000000 : 0xFFFFFF);
+            }
+        }
+
+        return bw;
     }
 
     private float dotToPt(float dots) {
@@ -527,7 +587,7 @@ public class Size120x80Panel extends JPanel {
             String text,
             float pageHeight) throws Exception {
 
-        cs.beginText();
+        cs.beginText(); 
         cs.setFont(font, fontSize);
         cs.newLineAtOffset(
                 dotToPt(xDot),

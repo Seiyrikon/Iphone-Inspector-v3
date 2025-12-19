@@ -13,7 +13,7 @@ import utils.Constants;
 
 public class SerialNoTextField extends JTextField {
     public SerialNoTextField(IphoneLabelInformation iphoneLabel) {
-        super(iphoneLabel.getSerialNo().isBlank() ? Constants.NA_STRING.get() : iphoneLabel.getSerialNo());
+        super(iphoneLabel.getSerialNo().isBlank() ? Constants.EMPTY_STRING.get() : iphoneLabel.getSerialNo());
 
         setAlignmentX(Component.LEFT_ALIGNMENT);
         setFont(new Font("SansSerif", Font.PLAIN, 20));

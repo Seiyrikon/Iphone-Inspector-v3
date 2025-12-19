@@ -299,19 +299,7 @@ public class Size120x80Panel extends JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // CommandResult result =
-        // CommandExecutor.runTool(Constants.STRING_ZPL2PDF.get(),
-        // Constants.STRING_ZPL_I.get(), "C:/txt/example.txt",
-        // Constants.STRING_ZPL_O.get(),
-        // "C:/txt/", Constants.STRING_ZPL_N.get() +
-        // Constants.PDF_120X80.get());
-        // try {
-        // Thread.sleep(2000);
-        // } catch (InterruptedException e) {
-        // e.printStackTrace();
-        // }
-        // return result;
-
+        
         float height = mmToPt(120);
         float width = mmToPt(80);
 
@@ -473,9 +461,7 @@ public class Size120x80Panel extends JPanel {
             e.printStackTrace();
         }
 
-        // informationLabel.setImei2("abcd");
-
-        if (informationLabel.getImei2().equals("N/A") || !informationLabel.getImei2().isBlank()) {
+        if (!informationLabel.getImei2().isBlank()) {
 
             try {
                 drawText(cs, font, 5,
@@ -498,16 +484,6 @@ public class Size120x80Panel extends JPanel {
             }
         }
 
-        // try {
-        // drawText(cs, font, 4,
-        // 640, 1300,
-        // "019425705186",
-        // height);
-        // } catch (Exception e) {
-        // // TODO Auto-generated catch block
-        // e.printStackTrace();
-        // }
-
         try {
             cs.close();
         } catch (IOException e) {
@@ -527,9 +503,6 @@ public class Size120x80Panel extends JPanel {
             BufferedImage image = renderer.renderImageWithDPI(0, 600f);
             File outputFile = new File("C:/images/rendered.png");
             ImageIO.write(image, "PNG", outputFile);
-            // BufferedImage bw = binarize(image, 160);
-            // BufferedImage inverted = invertImage(bw);
-            // ImageIO.write(inverted, "PNG", outputFile);
             System.out.println("Doc has been set");
         } catch (Exception e) {
             // TODO Auto-generated catch block

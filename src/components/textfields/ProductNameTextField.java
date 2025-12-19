@@ -13,7 +13,7 @@ import utils.Constants;
 
 public class ProductNameTextField extends JTextField {
     public ProductNameTextField(IphoneLabelInformation iphoneLabel) {
-        super(iphoneLabel.getProductName().isBlank() ? Constants.NA_STRING.get() : iphoneLabel.getProductName());
+        super(iphoneLabel.getProductName().isBlank() ? Constants.EMPTY_STRING.get() : iphoneLabel.getProductName());
 
         setAlignmentX(Component.LEFT_ALIGNMENT);
         setFont(new Font("SansSerif", Font.PLAIN, 20));

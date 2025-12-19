@@ -13,7 +13,7 @@ import utils.Constants;
 
 public class ImeiTextField extends JTextField {
     public ImeiTextField(IphoneLabelInformation iphoneLabel) {
-        super(iphoneLabel.getImei().isBlank() ? Constants.NA_STRING.get() : iphoneLabel.getImei());
+        super(iphoneLabel.getImei().isBlank() ? Constants.EMPTY_STRING.get() : iphoneLabel.getImei());
 
         setAlignmentX(Component.LEFT_ALIGNMENT);
         setFont(new Font("SansSerif", Font.PLAIN, 20));

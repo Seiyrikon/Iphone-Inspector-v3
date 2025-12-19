@@ -13,7 +13,7 @@ import utils.Constants;
 
 public class ProductVersionTextField extends JTextField {
     public ProductVersionTextField(IphoneLabelInformation iphoneLabel) {
-        super(iphoneLabel.getProductVersion().isBlank() ? Constants.NA_STRING.get() : iphoneLabel.getProductVersion());
+        super(iphoneLabel.getProductVersion().isBlank() ? Constants.EMPTY_STRING.get() : iphoneLabel.getProductVersion());
 
         setAlignmentX(Component.LEFT_ALIGNMENT);
         setFont(new Font("SansSerif", Font.PLAIN, 20));

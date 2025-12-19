@@ -138,81 +138,11 @@ public class Size120x80BlackPanel extends JPanel {
     }
 
     private void viewPdf() {
-        //Option 1
-    //     String zplLabel = null;
-    //     if(informationLabel.getImei2().isBlank() || informationLabel.getImei2().equals("N/A")) {
-    //         zplLabel = "^XA\r\n" + //
-    //                     "^MMT\r\n" + //
-    //                     "^PW945\r\n" + //
-    //                     "^LL1417\r\n" + //
-    //                     "^LS0\r\n" + //
-    //                     "^FO32,1312^GFA,03072,03072,00048,:Z64:\n" + //
-    //                     "eJxjYBgFo2AUjIJRQBfALyHBkMDD+PiAxAH5HsbHcgwH5PvleyqYP/bLNxg+4GF8UMdmYC/HDpT4ACJG1Y+qH1U/qn7IqB8FQwoAANXIlUw=:F707\n" + //
-    //                     "^FO576,1248^GFA,02304,02304,00036,:Z64:\n" + //
-    //                     "eJzt0LFqwzAQBuA7BNLQgNcLtM4rePRgmleRCbirIYuHkihLniFT+xodNXns3NFdmtWjCyb0ZJqAsEspoZv+4XRIHyckgJBfU8SUHz8PcTV//igk6U3+fnwiXQQTTDDBXGnOrdTn7v9MhS3YJTzKh06ZGAibselFh2xObCJeU9GOzLyWhDaBWuqE9AoqRWOzBxK2RCO1Jp2bN+kb4e6S0Eq7wZdvcwBnsotRrsyc2WIPYCO7NgSJm38xkSu3kM7savc6mCWb0jM3rqQ83OJuz4b0HZvGM8KVUtKiydkgGzT8SN7MfGNVumjWpgY+57fTsOnPwZMY/rlnE9ktkOomDDZgY6jYKHM/aaaT/XgS8sd8AYJwoL4=:1730\n" + //
-    //                     "^FO96,1056^GFA,00768,00768,00012,:Z64:\n" + //
-    //                     "eJytkjFqQzEMhuWa4kKh7hKyFJyT9F0hS+ZcoQcoWEfpUdwbZOnuMaPHR/F7qmzZjUMzVqCH+fifZP8SwOZw2MNmDyUsUYTpu54dUbjnbBw558bhSLQIX4E4GldEvv5gETR93HEx5ghbFvgk3HKRkuACOGYmC59Yq1fR+6BArcI9Pp6h6Qk8wZvw0hh3Va8yNz49V65mTbUt63UyRKneE3Wys5X7o0kumc7jhND0JnoAeS+a+AoSrA++nS3asHb+dQzvnbNPuXOiz3zhOPCQb+nHOmP9MPa9uk/yqMKN+ycXL++y5/5ePbtfH0Z/qm+tzpWf7PPSfR799yzucxnnVea4zX/na4a5j/ugaKG+J2V/6pMdJ+9VteUJ2i5yvHDyHp7K+aF82n7+T/wArGvM/g==:CFDD\n" + //
-    //                     "^BY2,3,26^FT44,1262^BCN,,N,N\r\n" + //
-    //                     "^FD>;" + informationLabel.getEid() + "^FS\r\n" + //
-    //                     "^BY2,3,26^FT44,1314^BCN,,N,N\r\n" + //
-    //                     "^FD>;" + informationLabel.getImei() + "^FS\r\n" + //
-    //                     "^FT44,1229^ADN,18,10^FH\\^FDEID " + informationLabel.getEid() + "^FS\r\n" + //
-    //                     "^FT565,1266^ADN,18,10^FH\\^FDUPC^FS\r\n" + //
-    //                     "^FT44,1280^ADN,18,10^FH\\^FD(S) Serial No. " + informationLabel.getSerialNo() + "^FS\r\n" + //
-    //                     "^FT44,1333^ADN,18,10^FH\\^FDIMEI/MEID " + informationLabel.getImei() + "^FS\r\n" + //
-    //                     "^FT44,1154^ADN,18,10^FH\\^FD" + informationLabel.getModelRegion() + " " + informationLabel.getProductType() + ", " + informationLabel.getProductColor() + ", " + informationLabel.getStorageType() + "^FS\r\n" + //
-    //                     "^FT44,1182^ADN,18,10^FH\\^FDOther items as marked thereon Model A2482^FS\r\n" + //
-    //                     "^FT211,1070^ADN,18,10^FH\\^FDFCC ID:BCG-E4000A^FS\r\n" + //
-    //                     "^FT211,1098^ADN,18,10^FH\\^FDIC: 579C-E4000A^FS\r\n" + //
-    //                     "^PQ1,0,1,Y^XZ";
-    //     } else {
-    //     zplLabel = "^XA\r\n" + //
-    //                     "^MMT\r\n" + //
-    //                     "^PW945\r\n" + //
-    //                     "^LL1417\r\n" + //
-    //                     "^LS0\r\n" + //
-    //                     "^FO32,1312^GFA,03072,03072,00048,:Z64:\n" + //
-    //                     "eJxjYBgFo2AUjIJRQBfALyHBkMDD+PiAxAH5HsbHcgwH5PvleyqYP/bLNxg+4GF8UMdmYC/HDpT4ACJG1Y+qH1U/qn7IqB8FQwoAANXIlUw=:F707\n" + //
-    //                     "^FO576,1248^GFA,02304,02304,00036,:Z64:\n" + //
-    //                     "eJzt0LFqwzAQBuA7BNLQgNcLtM4rePRgmleRCbirIYuHkihLniFT+xodNXns3NFdmtWjCyb0ZJqAsEspoZv+4XRIHyckgJBfU8SUHz8PcTV//igk6U3+fnwiXQQTTDDBXGnOrdTn7v9MhS3YJTzKh06ZGAibselFh2xObCJeU9GOzLyWhDaBWuqE9AoqRWOzBxK2RCO1Jp2bN+kb4e6S0Eq7wZdvcwBnsotRrsyc2WIPYCO7NgSJm38xkSu3kM7savc6mCWb0jM3rqQ83OJuz4b0HZvGM8KVUtKiydkgGzT8SN7MfGNVumjWpgY+57fTsOnPwZMY/rlnE9ktkOomDDZgY6jYKHM/aaaT/XgS8sd8AYJwoL4=:1730\n" + //
-    //                     "^FO576,1312^GFA,02816,02816,00044,:Z64:\n" + //
-    //                     "eJxjYBgFo2AUDHXA3sN/4IAE8/EHFQf+JFTI9x/vYez/+CCBsZ/5g2H/xx8fDH/I9/AzH5DvqRhVO6p2VO2oWuqoHQWjYCgDAA5GF3U=:42E0\n" + //
-    //                     "^FO96,1056^GFA,00768,00768,00012,:Z64:\n" + //
-    //                     "eJytkjFqQzEMhuWa4kKh7hKyFJyT9F0hS+ZcoQcoWEfpUdwbZOnuMaPHR/F7qmzZjUMzVqCH+fifZP8SwOZw2MNmDyUsUYTpu54dUbjnbBw558bhSLQIX4E4GldEvv5gETR93HEx5ghbFvgk3HKRkuACOGYmC59Yq1fR+6BArcI9Pp6h6Qk8wZvw0hh3Va8yNz49V65mTbUt63UyRKneE3Wys5X7o0kumc7jhND0JnoAeS+a+AoSrA++nS3asHb+dQzvnbNPuXOiz3zhOPCQb+nHOmP9MPa9uk/yqMKN+ycXL++y5/5ePbtfH0Z/qm+tzpWf7PPSfR799yzucxnnVea4zX/na4a5j/ugaKG+J2V/6pMdJ+9VteUJ2i5yvHDyHp7K+aF82n7+T/wArGvM/g==:CFDD\n" + //
-    //                     "^BY2,3,26^FT44,1262^BCN,,N,N\r\n" + //
-    //                     "^FD>;" + informationLabel.getEid() + "^FS\r\n" + //
-    //                     "^BY2,3,26^FT44,1314^BCN,,N,N\r\n" + //
-    //                     "^FD>;" + informationLabel.getImei() + "^FS\r\n" + //
-    //                     "^FT44,1229^ADN,18,10^FH\\^FDEID " + informationLabel.getEid() + "^FS\r\n" + //
-    //                     "^FT565,1266^ADN,18,10^FH\\^FDUPC^FS\r\n" + //
-    //                     "^FT44,1280^ADN,18,10^FH\\^FD(S) Serial No. " + informationLabel.getSerialNo() + "^FS\r\n" + //
-    //                     "^FT44,1333^ADN,18,10^FH\\^FDIMEI/MEID " + informationLabel.getImei() + "^FS\r\n" + //
-    //                     "^FT581,1324^ADN,18,10^FH\\^FDIMEI2 " + informationLabel.getImei2() + "^FS\r\n" + //
-    //                     "^FT44,1154^ADN,18,10^FH\\^FD" + informationLabel.getModelRegion() + " " + informationLabel.getProductType() + ", " + informationLabel.getProductColor() + ", " + informationLabel.getStorageType() + "^FS\r\n" + //
-    //                     "^FT44,1182^ADN,18,10^FH\\^FDOther items as marked thereon Model A2482^FS\r\n" + //
-    //                     "^FT211,1070^ADN,18,10^FH\\^FDFCC ID:BCG-E4000A^FS\r\n" + //
-    //                     "^FT211,1098^ADN,18,10^FH\\^FDIC: 579C-E4000A^FS\r\n" + //
-    //                     "^PQ1,0,1,Y^XZ";
-    // }
-    //     generatePdf(zplLabel);
-        //Option 1
-
-        //Option 2
         generatePdfImage();
-        //Option 2
         
-        //Option 1
-        // pdfViewer.is120x80 = true;
-        // pdfViewer.setSize(600, 700);
-        // pdfViewer.setVisible(true);
-        // pdfViewer.controller.openDocument("C:/txt/example.pdf");
-        //Option 1
-
-        //Option 2
         try {
             BufferedImage finalImage = ImageIO.read(new File("C:/images/rendered.png"));
             JFrame frame = new JFrame("Label Preview");
-            // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             Image scaled = finalImage.getScaledInstance(400, -1, Image.SCALE_FAST);
 
@@ -226,7 +156,6 @@ public class Size120x80BlackPanel extends JPanel {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        //Option 2
     }
 
     private void generatePdf(String zplLabel) {
@@ -288,18 +217,6 @@ public class Size120x80BlackPanel extends JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // CommandResult result =
-        // CommandExecutor.runTool(Constants.STRING_ZPL2PDF.get(),
-        // Constants.STRING_ZPL_I.get(), "C:/txt/example.txt",
-        // Constants.STRING_ZPL_O.get(),
-        // "C:/txt/", Constants.STRING_ZPL_N.get() +
-        // Constants.PDF_120X80.get());
-        // try {
-        // Thread.sleep(2000);
-        // } catch (InterruptedException e) {
-        // e.printStackTrace();
-        // }
-        // return result;
 
         float height = mmToPt(120);
         float width = mmToPt(80);
@@ -462,9 +379,7 @@ public class Size120x80BlackPanel extends JPanel {
             e.printStackTrace();
         }
 
-        // informationLabel.setImei2("abcd");
-
-        if (informationLabel.getImei2().equals("N/A") || !informationLabel.getImei2().isBlank()) {
+        if (!informationLabel.getImei2().isBlank()) {
 
             try {
                 drawText(cs, font, 5,

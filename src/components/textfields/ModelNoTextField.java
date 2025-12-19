@@ -13,7 +13,7 @@ import utils.Constants;
 
 public class ModelNoTextField extends JTextField {
     public ModelNoTextField(IphoneLabelInformation iphoneLabel) {
-        super(iphoneLabel.getModelRegion().isBlank() ? Constants.NA_STRING.get() : iphoneLabel.getModelRegion());
+        super(iphoneLabel.getModelRegion().isBlank() ? Constants.EMPTY_STRING.get() : iphoneLabel.getModelRegion());
 
         setAlignmentX(Component.LEFT_ALIGNMENT);
         setFont(new Font("SansSerif", Font.PLAIN, 20));

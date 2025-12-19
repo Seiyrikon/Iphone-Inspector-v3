@@ -14,7 +14,7 @@ import utils.Constants;
 public class EidTextField extends JTextField {
     public EidTextField(IphoneLabelInformation iphoneLabel) {
 
-        super(iphoneLabel.getEid().isBlank() ? "" : iphoneLabel.getEid());
+        super(iphoneLabel.getEid().isBlank() ? Constants.EMPTY_STRING.get() : iphoneLabel.getEid());
 
         setAlignmentX(Component.LEFT_ALIGNMENT);
         setFont(new Font("SansSerif", Font.PLAIN, 20));

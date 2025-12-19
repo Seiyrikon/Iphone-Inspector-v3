@@ -23,6 +23,7 @@ public enum Constants {
     SIZE_ICON_BlACK("/resources/icons/size-icon-black.png"),
     DISCONNECTED_ICON("/resources/icons/disconnected-icon.png"),
     PHONE_FAILED("/resources/icons/phone-failed-icon.png"),
+    PRINTER_FAILED("/resources/icons/printer-failed-icon.png"),
 
     IDEVICE_ID("idevice_id.exe"),
     DEVICE_LIST("-l"),

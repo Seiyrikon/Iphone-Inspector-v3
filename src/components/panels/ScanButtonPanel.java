@@ -30,6 +30,7 @@ import components.labels.ScanButtonIconLabel;
 import components.labels.ScanButtonTextLabel;
 import components.labels.SerialNoLabel;
 import components.textfields.EidTextField;
+import components.textfields.ImeiTextField;
 import model.IphoneLabelInformation;
 import model.IphoneModel;
 import services.device.DeviceService;
@@ -211,7 +212,7 @@ public class ScanButtonPanel extends JPanel {
 
         // --- IMEI ---
         informationLabel.setImei(iphone.getImei());
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.IMEI.get()), new ImeiLabel(informationLabel.getImei().isBlank() ? Constants.NA_STRING.get() : informationLabel.getImei())));
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.IMEI.get()), new ImeiTextField(informationLabel)));
         
         // --- IMEI2 ---
         informationLabel.setImei2(iphone.getImei2());

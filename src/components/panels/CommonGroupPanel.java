@@ -19,6 +19,7 @@ import components.labels.ProductTypeLabel;
 import components.labels.ProductVersionLabel;
 import components.labels.SerialNoLabel;
 import components.textfields.EidTextField;
+import components.textfields.ImeiTextField;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -35,6 +36,19 @@ public class CommonGroupPanel extends JPanel {
 
         add(label);
         add(Box.createHorizontalStrut(116));
+        add(component);
+
+        setAlignmentX(Component.LEFT_ALIGNMENT);
+    }
+
+    public CommonGroupPanel(JLabel label, ImeiTextField component) {
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setBackground(backgroundColor);
+        setOpaque(false);
+        setBorder(new EmptyBorder(0, 0, 0, 10));
+
+        add(label);
+        add(Box.createHorizontalStrut(52));
         add(component);
 
         setAlignmentX(Component.LEFT_ALIGNMENT);

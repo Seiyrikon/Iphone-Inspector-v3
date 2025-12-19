@@ -29,7 +29,7 @@ public class CommandExecutor {
             }
 
             while ((line = stdErr.readLine()) != null) {
-                output.append(line).append(Constants.SINGLE_QUOTE_INFO_SEPARATOR.get());
+                error.append(line).append(Constants.SINGLE_QUOTE_INFO_SEPARATOR.get());
             }
 
             result.exitCode = process.waitFor();

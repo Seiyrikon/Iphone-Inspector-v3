@@ -11,10 +11,9 @@ import javax.swing.event.DocumentListener;
 import model.IphoneLabelInformation;
 import utils.Constants;
 
-public class EidTextField extends JTextField {
-    public EidTextField(IphoneLabelInformation iphoneLabel) {
-
-        super(iphoneLabel.getEid().isBlank() ? "" : iphoneLabel.getEid());
+public class Imei2TextField extends JTextField {
+    public Imei2TextField(IphoneLabelInformation iphoneLabel) {
+        super(iphoneLabel.getImei2().isBlank() ? Constants.NA_STRING.get() : iphoneLabel.getImei2());
 
         setAlignmentX(Component.LEFT_ALIGNMENT);
         setFont(new Font("SansSerif", Font.PLAIN, 20));
@@ -27,16 +26,22 @@ public class EidTextField extends JTextField {
 
         getDocument().addDocumentListener(new DocumentListener() {
             @Override
-            public void insertUpdate(DocumentEvent e) { saveValue(); }
+            public void insertUpdate(DocumentEvent e) {
+                saveValue();
+            }
 
             @Override
-            public void removeUpdate(DocumentEvent e) { saveValue(); }
+            public void removeUpdate(DocumentEvent e) {
+                saveValue();
+            }
 
             @Override
-            public void changedUpdate(DocumentEvent e) { saveValue(); }
+            public void changedUpdate(DocumentEvent e) {
+                saveValue();
+            }
 
             private void saveValue() {
-                iphoneLabel.setEid(getText());
+                iphoneLabel.setImei2(getText());
             }
         });
     }

@@ -75,7 +75,7 @@ public enum Constants {
     PDF_120X80("pdf_120x80.pdf"),
     PDF_20X80("pdf_20x80.pdf"),
     
-    EPMTY_STRING(""),
+    EMPTY_STRING(""),
     NA_STRING("N/A"),
     
     STRING_ZPL2PDF("ZPL2PDF.exe"),

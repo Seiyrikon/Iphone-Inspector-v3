@@ -19,7 +19,13 @@ import components.labels.ProductTypeLabel;
 import components.labels.ProductVersionLabel;
 import components.labels.SerialNoLabel;
 import components.textfields.EidTextField;
+import components.textfields.Imei2TextField;
 import components.textfields.ImeiTextField;
+import components.textfields.ModelNoTextField;
+import components.textfields.ProductNameTextField;
+import components.textfields.ProductTypeTextField;
+import components.textfields.ProductVersionTextField;
+import components.textfields.SerialNoTextField;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -48,7 +54,85 @@ public class CommonGroupPanel extends JPanel {
         setBorder(new EmptyBorder(0, 0, 0, 10));
 
         add(label);
-        add(Box.createHorizontalStrut(52));
+        add(Box.createHorizontalStrut(54));
+        add(component);
+
+        setAlignmentX(Component.LEFT_ALIGNMENT);
+    }
+
+    public CommonGroupPanel(JLabel label, Imei2TextField component) {
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setBackground(backgroundColor);
+        setOpaque(false);
+        setBorder(new EmptyBorder(0, 0, 0, 10));
+
+        add(label);
+        add(Box.createHorizontalStrut(98));
+        add(component);
+
+        setAlignmentX(Component.LEFT_ALIGNMENT);
+    }
+
+    public CommonGroupPanel(JLabel label, SerialNoTextField component) {
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setBackground(backgroundColor);
+        setOpaque(false);
+        setBorder(new EmptyBorder(0, 0, 0, 10));
+
+        add(label);
+        add(Box.createHorizontalStrut(35));
+        add(component);
+
+        setAlignmentX(Component.LEFT_ALIGNMENT);
+    }
+
+    public CommonGroupPanel(JLabel label, ModelNoTextField component) {
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setBackground(backgroundColor);
+        setOpaque(false);
+        setBorder(new EmptyBorder(0, 0, 0, 10));
+
+        add(label);
+        add(Box.createHorizontalStrut(18));
+        add(component);
+
+        setAlignmentX(Component.LEFT_ALIGNMENT);
+    }
+
+    public CommonGroupPanel(JLabel label, ProductNameTextField component) {
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setBackground(backgroundColor);
+        setOpaque(false);
+        setBorder(new EmptyBorder(0, 0, 0, 10));
+
+        add(label);
+        add(Box.createHorizontalStrut(22));
+        add(component);
+
+        setAlignmentX(Component.LEFT_ALIGNMENT);
+    }
+
+    public CommonGroupPanel(JLabel label, ProductTypeTextField component) {
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setBackground(backgroundColor);
+        setOpaque(false);
+        setBorder(new EmptyBorder(0, 0, 0, 10));
+
+        add(label);
+        add(Box.createHorizontalStrut(30));
+        add(component);
+
+        setAlignmentX(Component.LEFT_ALIGNMENT);
+    }
+
+    public CommonGroupPanel(JLabel label, ProductVersionTextField component) {
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setBackground(backgroundColor);
+        setOpaque(false);
+        setBorder(new EmptyBorder(0, 0, 0, 10));
+
+        add(label);
+        add(Box.createHorizontalStrut(8));
         add(component);
 
         setAlignmentX(Component.LEFT_ALIGNMENT);

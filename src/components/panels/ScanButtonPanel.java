@@ -30,7 +30,13 @@ import components.labels.ScanButtonIconLabel;
 import components.labels.ScanButtonTextLabel;
 import components.labels.SerialNoLabel;
 import components.textfields.EidTextField;
+import components.textfields.Imei2TextField;
 import components.textfields.ImeiTextField;
+import components.textfields.ModelNoTextField;
+import components.textfields.ProductNameTextField;
+import components.textfields.ProductTypeTextField;
+import components.textfields.ProductVersionTextField;
+import components.textfields.SerialNoTextField;
 import model.IphoneLabelInformation;
 import model.IphoneModel;
 import services.device.DeviceService;
@@ -116,7 +122,10 @@ public class ScanButtonPanel extends JPanel {
     private void generateInfo() {
         infoContainer.removeAll();
         infoContainer.setLayout(new BoxLayout(infoContainer, BoxLayout.Y_AXIS));
-
+        informationLabel.setEid(
+            iphone.getSerialNo().equals(informationLabel.getSerialNo()) 
+            ? informationLabel.getEid() 
+            : Constants.EMPTY_STRING.get());
         CommandResult device = deviceService.detect();
 
         // if (device.output.isBlank() && device.error.isBlank()) {
@@ -128,7 +137,7 @@ public class ScanButtonPanel extends JPanel {
 
         // --- EID ---
         infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.EID.get()), new EidTextField(informationLabel)));
-
+        
         // --- COLOR ---
         if(Constants.IPHONE_8.get().equals(iphone.getProductType()) 
             || Constants.IPHONE_8_PLUS.get().equals(iphone.getProductType())) {
@@ -216,27 +225,27 @@ public class ScanButtonPanel extends JPanel {
         
         // --- IMEI2 ---
         informationLabel.setImei2(iphone.getImei2());
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.IMEI2.get()), new Imei2Label(informationLabel.getImei2().isBlank() ? Constants.NA_STRING.get() : informationLabel.getImei2())));
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.IMEI2.get()), new Imei2TextField(informationLabel)));
 
         // --- SERIAL NO ---
         informationLabel.setSerialNo(iphone.getSerialNo());
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.SERIAL_NUMBER.get()), new SerialNoLabel(informationLabel.getSerialNo().isBlank() ? Constants.NA_STRING.get() : informationLabel.getSerialNo())));
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.SERIAL_NUMBER.get()), new SerialNoTextField(informationLabel)));
 
         // --- MODEL NO ---
         informationLabel.setModelRegion(iphone.getModel() + iphone.getRegion());
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.MODEL_NUMBER.get()), new ModelNoLabel(informationLabel.getModelRegion().isBlank() ? Constants.NA_STRING.get() : informationLabel.getModelRegion())));
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.MODEL_NUMBER.get()), new ModelNoTextField(informationLabel)));
 
         // --- PRODUCT NAME ---
         informationLabel.setProductName(iphone.getProductName());
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.PRODUCT_NAME.get()), new ProductNameLabel(informationLabel.getProductName().isBlank() ? Constants.NA_STRING.get() : informationLabel.getProductName())));
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.PRODUCT_NAME.get()), new ProductNameTextField(informationLabel)));
 
         // --- PRODUCT TYPE ---
         informationLabel.setProductType(iphone.getProductType());
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.PRODUCT_TYPE.get()), new ProductTypeLabel(informationLabel.getProductType().isBlank() ? Constants.NA_STRING.get() : informationLabel.getProductType())));
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.PRODUCT_TYPE.get()), new ProductTypeTextField(informationLabel)));
 
         // --- PRODUCT VERSION ---
         informationLabel.setProductVersion(iphone.getProductVersion());
-        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.PRODUCT_VERSION.get()), new ProductVersionLabel(informationLabel.getProductVersion().isBlank() ? Constants.NA_STRING.get() : informationLabel.getProductVersion())));
+        infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.PRODUCT_VERSION.get()), new ProductVersionTextField(informationLabel)));
 
         infoContainer.revalidate();
         infoContainer.repaint();

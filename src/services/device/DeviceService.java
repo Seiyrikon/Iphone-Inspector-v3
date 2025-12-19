@@ -26,6 +26,13 @@ public class DeviceService {
         IphoneModel iphone = new IphoneModel();
         CommandResult result = CommandExecutor.runTool(Constants.IDEVICE_INFO.get());
 
+        if (result.output.equals("ERROR: No device found!'")) {
+            iphone.isFailed = true;
+            return iphone;
+        }
+
+        iphone.isFailed = false;
+
         String[] parts = result.output.split(Constants.SINGLE_QUOTE_INFO_SEPARATOR.get());
 
         for (String part : parts) {

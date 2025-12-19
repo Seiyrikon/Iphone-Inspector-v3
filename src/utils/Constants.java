@@ -21,6 +21,8 @@ public enum Constants {
     SIZE20X80_BLACK("30mm X 90mm Black"),
     SIZE_ICON("/resources/icons/size-icon.png"),
     SIZE_ICON_BlACK("/resources/icons/size-icon-black.png"),
+    DISCONNECTED_ICON("/resources/icons/disconnected-icon.png"),
+    PHONE_FAILED("/resources/icons/phone-failed-icon.png"),
 
     IDEVICE_ID("idevice_id.exe"),
     DEVICE_LIST("-l"),

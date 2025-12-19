@@ -141,6 +141,7 @@ public class PrintButtonPanel extends JPanel {
                     printerConnection = usbPrinter.getConnection();
                     printerConnection.open();
                 } else {
+                    System.out.println("No Printer Detected");
                     return;
                 }
             } catch (ConnectionException e) {

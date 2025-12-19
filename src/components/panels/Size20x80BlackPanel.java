@@ -40,8 +40,6 @@ import com.google.zxing.oned.Code128Writer;
 
 import components.frame.PdfViewerFrame;
 import components.labels.Size20x80BlackIconLabel;
-import components.labels.Size20x80BlackTextLabel;
-import components.labels.Size20x80IconLabel;
 import components.labels.Size20x80TextLabel;
 import model.IphoneLabelInformation;
 
@@ -146,7 +144,6 @@ public class Size20x80BlackPanel extends JPanel {
             frame.setVisible(true);
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -173,7 +170,6 @@ public class Size20x80BlackPanel extends JPanel {
         try {
             font = PDType0Font.load(doc, new File("fonts/SF-Pro.ttf"));
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -181,7 +177,6 @@ public class Size20x80BlackPanel extends JPanel {
         try {
             cs = new PDPageContentStream(doc, page);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -191,7 +186,6 @@ public class Size20x80BlackPanel extends JPanel {
                     "EID " + informationLabel.getEid(),
                     height);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -201,7 +195,6 @@ public class Size20x80BlackPanel extends JPanel {
                     "(S) Serial No. " + informationLabel.getSerialNo(),
                     height);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -211,7 +204,6 @@ public class Size20x80BlackPanel extends JPanel {
                     "IMEI/MEID " + informationLabel.getImei(),
                     height);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -222,7 +214,6 @@ public class Size20x80BlackPanel extends JPanel {
                             + informationLabel.getProductColor() + ", " + informationLabel.getStorageType(),
                     height);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -232,7 +223,6 @@ public class Size20x80BlackPanel extends JPanel {
                     "Designed by Apple in California Assembled in China",
                     height);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -242,7 +232,6 @@ public class Size20x80BlackPanel extends JPanel {
                     "Other items as marked thereon Model A2108",
                     height);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -250,7 +239,6 @@ public class Size20x80BlackPanel extends JPanel {
             drawBcLogo(cs, doc,
                     151, 10);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -258,7 +246,6 @@ public class Size20x80BlackPanel extends JPanel {
             drawFccLogo(cs, doc,
                     165, 7);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -268,7 +255,6 @@ public class Size20x80BlackPanel extends JPanel {
                     informationLabel.getEid(),
                     height, 16, 50);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -279,7 +265,6 @@ public class Size20x80BlackPanel extends JPanel {
                     informationLabel.getSerialNo(),
                     height, 16, 37);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -290,7 +275,6 @@ public class Size20x80BlackPanel extends JPanel {
                     informationLabel.getImei(),
                     height, 16, 24, 1.2f);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -299,7 +283,6 @@ public class Size20x80BlackPanel extends JPanel {
             drawUpcABarcode(
                     cs, doc, 145, 45);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -309,7 +292,6 @@ public class Size20x80BlackPanel extends JPanel {
                     "UPC",
                     height);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -321,7 +303,6 @@ public class Size20x80BlackPanel extends JPanel {
                         "IMEI2 " + informationLabel.getImei2(),
                         height);
             } catch (Exception e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
@@ -331,7 +312,6 @@ public class Size20x80BlackPanel extends JPanel {
                         informationLabel.getImei2(),
                         height, 16, 11, 1.2f);
             } catch (Exception e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -342,7 +322,6 @@ public class Size20x80BlackPanel extends JPanel {
                     "FCC ID: BCG-E4000A",
                     height);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -352,14 +331,12 @@ public class Size20x80BlackPanel extends JPanel {
                     "IC: 579C-E4000A",
                     height);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
         try {
             cs.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         try {
@@ -380,13 +357,11 @@ public class Size20x80BlackPanel extends JPanel {
             ImageIO.write(inverted, "PNG", outputFile);
             System.out.println("Doc has been set");
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         try {
             doc.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -430,10 +405,6 @@ public class Size20x80BlackPanel extends JPanel {
 
     private float mmToPt(float mm) {
         return mm * 72f / 25.4f;
-    }
-
-    private int mmToDots(float mm) {
-        return Math.round(mm * 300f / 25.4f);
     }
 
     private void drawText(PDPageContentStream cs,

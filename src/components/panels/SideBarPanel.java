@@ -35,7 +35,6 @@ public class SideBarPanel extends JPanel{
         try {
             printButton = new PrintButtonPanel(pdfViewer, informationLabel, pdf);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         printButton.setBounds(10, 180, 180, 50);

@@ -2,7 +2,6 @@ package components.labels;
 
 import javax.swing.JLabel;
 
-import components.images.SizeIcon;
 import components.images.SizeIconBlack;
 
 public class Size20x80BlackIconLabel extends JLabel {

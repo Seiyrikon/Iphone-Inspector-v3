@@ -7,7 +7,6 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 
 import model.IphoneLabelInformation;
-import utils.Constants;
 
 public class ColorTypeComboBox extends JComboBox<String> {
     IphoneLabelInformation informationLabel;

@@ -8,11 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
@@ -20,15 +16,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.fixup.processor.PDDocumentProcessor;
-import org.apache.pdfbox.rendering.PDFRenderer;
-
 import com.zebra.sdk.comm.Connection;
 import com.zebra.sdk.comm.ConnectionException;
 import com.zebra.sdk.graphics.ZebraImageFactory;
 import com.zebra.sdk.graphics.ZebraImageI;
-import com.zebra.sdk.printer.PrinterLanguage;
 import com.zebra.sdk.printer.ZebraPrinterFactory;
 import com.zebra.sdk.printer.discovery.DiscoveredUsbPrinter;
 import com.zebra.sdk.printer.discovery.UsbDiscoverer;
@@ -37,7 +28,6 @@ import components.frame.PdfViewerFrame;
 import components.images.PrinterFailedIcon;
 import components.labels.PrintButtonIconLabel;
 import components.labels.PrintButtonTextLabel;
-import fr.w3blog.zpl.model.element.ZebraGraficBox;
 import model.IphoneLabelInformation;
 import model.PdfDocument;
 
@@ -97,7 +87,6 @@ public class PrintButtonPanel extends JPanel {
                 try {
                     printLabelImage();
                 } catch (Exception e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }
@@ -127,7 +116,6 @@ public class PrintButtonPanel extends JPanel {
                 printerConnection.open();
             }
         } catch (ConnectionException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -160,7 +148,6 @@ public class PrintButtonPanel extends JPanel {
                     return;
                 }
             } catch (ConnectionException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -174,15 +161,14 @@ public class PrintButtonPanel extends JPanel {
 
                 if (informationLabel.is120x80() == true) {
                     System.out.println("Printing in 80mm x 120mm");
-                    // ZebraPrinterFactory.getInstance(printerConnection).printImage(toPrint, 0, 0,
-                    // 945, 1417, false);
+                    ZebraPrinterFactory.getInstance(printerConnection).printImage(toPrint, 0, 0,
+                    945, 1417, false);
                 } else {
                     System.out.println("Printing in 90mm x 30mm");
-                    // ZebraPrinterFactory.getInstance(printerConnection).printImage(toPrint, 0, 0,
-                    // 945, 354, false);
+                    ZebraPrinterFactory.getInstance(printerConnection).printImage(toPrint, 0, 0,
+                    945, 354, false);
                 }
             } catch (Exception e) {
-                // TODO: handle exception
             }
         }
     }

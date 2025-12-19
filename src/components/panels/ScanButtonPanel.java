@@ -2,7 +2,6 @@ package components.panels;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,11 +11,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -24,16 +20,9 @@ import components.combobox.ColorTypeComboBox;
 import components.combobox.StorageTypeComboBox;
 import components.images.DisconnectedIcon;
 import components.images.PhoneFailedIcon;
-import components.labels.Imei2Label;
-import components.labels.ImeiLabel;
 import components.labels.IphoneInfoLabel;
-import components.labels.ModelNoLabel;
-import components.labels.ProductNameLabel;
-import components.labels.ProductTypeLabel;
-import components.labels.ProductVersionLabel;
 import components.labels.ScanButtonIconLabel;
 import components.labels.ScanButtonTextLabel;
-import components.labels.SerialNoLabel;
 import components.textfields.EidTextField;
 import components.textfields.Imei2TextField;
 import components.textfields.ImeiTextField;
@@ -45,7 +34,6 @@ import components.textfields.SerialNoTextField;
 import model.IphoneLabelInformation;
 import model.IphoneModel;
 import services.device.DeviceService;
-import utils.CommandExecutor;
 import utils.CommandResult;
 import utils.Constants;
 

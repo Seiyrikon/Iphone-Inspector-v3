@@ -30,7 +30,7 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         DeviceService deviceService = new DeviceService(null);
         setUndecorated(true);
-        setSize(800, 500);
+        setSize(800, 720);
         setLocationRelativeTo(null);
         setBackground(new Color(0, 0, 0, 0));
 

@@ -9,16 +9,14 @@ public class BodyContainerPanel extends JPanel {
 
     public BodyContainerPanel() {
         setLayout(null);
-        // setBackground(Color.BLUE);
         setBackground(new Color(20, 21, 22));
 
         infoContainer = new InformationContainerPanel();
 
-        // Set bounds with 20px margin on all sides
         infoContainer.setBounds(
                 20, 20,
-                getWidth() - 40, // width minus left+right margin
-                getHeight() - 40 // height minus top+bottom margin
+                getWidth() - 40,
+                getHeight() - 40 
         );
 
         add(infoContainer);

@@ -88,7 +88,9 @@ public enum Constants {
     STRING_ZPL_Z("-z"),
 
     STRING_DOT_PDF(".pdf"),
-    OUTPUT_FOLDER("src/resources/pdf/");
+    OUTPUT_FOLDER("src/resources/pdf/"),
+
+    CELLWEGO_ICON("/resources/icons/cellwego-icon.png");
 
     private final String value;
 

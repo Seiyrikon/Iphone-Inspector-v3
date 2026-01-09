@@ -2,6 +2,8 @@ package components.frame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -15,6 +17,7 @@ import model.IphoneLabelInformation;
 import model.IphoneModel;
 import model.PdfDocument;
 import services.device.DeviceService;
+import utils.Constants;
 
 public class MainFrame extends JFrame {
     TitleBarPanel titleBar;
@@ -59,6 +62,9 @@ public class MainFrame extends JFrame {
         mainPanel.add(titleBar, BorderLayout.NORTH);
         mainPanel.add(sideBar, BorderLayout.WEST);
         mainPanel.add(bodyContainer, BorderLayout.CENTER);
+
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource(Constants.CELLWEGO_ICON.get()));
+        setIconImage(icon);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

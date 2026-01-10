@@ -136,7 +136,7 @@ public class Size120x80BlackPanel extends JPanel {
         generatePdfImage();
         
         try {
-            BufferedImage finalImage = ImageIO.read(new File("C:/images/rendered.png"));
+            BufferedImage finalImage = ImageIO.read(new File("./images/rendered.png"));
             JFrame frame = new JFrame("Label Preview");
 
             Image scaled = finalImage.getScaledInstance(400, -1, Image.SCALE_FAST);
@@ -154,9 +154,17 @@ public class Size120x80BlackPanel extends JPanel {
 
     private void generatePdfImage() {
         try {
-            File dir = new File("C:/txt");
-            if (!dir.exists()) {
-                dir.mkdirs(); // Creates directory if missing
+            // File dir = new File("C:/txt");
+            // if (!dir.exists()) {
+            //     dir.mkdirs(); // Creates directory if missing
+            // }
+            File txtDir = new File("./txt");
+            if (!txtDir.exists()) {
+                txtDir.mkdirs(); // Creates directory if missing
+            }
+            File imagesDir = new File("./images");
+            if (!imagesDir.exists()) {
+                imagesDir.mkdirs(); // Creates directory if missing
             }
             System.out.println("File created!");
         } catch (Exception e) {
@@ -335,17 +343,17 @@ public class Size120x80BlackPanel extends JPanel {
             e.printStackTrace();
         }
         try {
-            File pngFile = new File("C:/images/rendered.png");
-            File pdfFile = new File("C:/txt/example.pdf");
+            File pngFile = new File("./images/rendered.png");
+            File pdfFile = new File("./txt/example.pdf");
 
             pngFile.delete();
             pdfFile.delete();
 
-            doc.save("C:/txt/example.pdf");
+            doc.save("./txt/example.pdf");
             pdf.setPdf(doc);
             PDFRenderer renderer = new PDFRenderer(doc);
             BufferedImage image = renderer.renderImageWithDPI(0, 600f);
-            File outputFile = new File("C:/images/rendered.png");
+            File outputFile = new File("./images/rendered.png");
 
             BufferedImage bw = binarize(image, 160);
             BufferedImage inverted = invertImage(bw);
@@ -488,7 +496,7 @@ public class Size120x80BlackPanel extends JPanel {
             int imageXPosition, int imageYPosition) throws Exception {
 
         PDImageXObject img = PDImageXObject.createFromFile(
-                "C:/images/upc_barcode.png",
+                "./static-images/upc_barcode.png",
                 doc);
 
         cs.drawImage(img, imageXPosition,
@@ -501,7 +509,7 @@ public class Size120x80BlackPanel extends JPanel {
             PDDocument doc, int imageXPosition, int imageYPosition) throws Exception {
 
         PDImageXObject img = PDImageXObject.createFromFile(
-                "C:/images/fcc_logo.png",
+                "./static-images/fcc_logo.png",
                 doc);
 
         cs.drawImage(img, imageXPosition,
@@ -514,7 +522,7 @@ public class Size120x80BlackPanel extends JPanel {
         PDDocument doc, int imageXPosition, int imageYPosition) throws Exception {
 
     PDImageXObject img = PDImageXObject.createFromFile(
-            "C:/images/bc_logo.png",
+            "./static-images/bc_logo.png",
             doc);
 
     cs.drawImage(img, imageXPosition,

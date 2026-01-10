@@ -152,12 +152,12 @@ public class PrintButtonPanel extends JPanel {
             }
         }
 
-        File image = new File("C:/images/rendered.png");
+        File image = new File("./images/rendered.png");
 
         if (image.exists() && image.isFile()) {
 
             try {
-                ZebraImageI toPrint = ZebraImageFactory.getImage("C:/images/rendered.png");
+                ZebraImageI toPrint = ZebraImageFactory.getImage("./images/rendered.png");
 
                 if (informationLabel.is120x80() == true) {
                     System.out.println("Printing in 80mm x 120mm");

@@ -159,6 +159,12 @@ public class DeviceService {
                 iphone.setProductVersion(labels[1]);
                 continue;
             }
+
+            if (part.contains("IntegratedCircuitCardIdentity:")) {
+                String[] labels = part.split(Constants.SPACE_INFO_SEPARATOR.get());
+                iphone.setIcc(labels[1]);
+                continue;
+            }
         }
 
         //for productType simulation, remove this code for the final version

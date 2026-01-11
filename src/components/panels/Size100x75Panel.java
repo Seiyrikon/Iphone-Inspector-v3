@@ -325,6 +325,26 @@ public class Size100x75Panel extends JPanel {
             }
         }
 
+        if(!informationLabel.getIcc().isBlank()) {
+            try {
+                drawText(cs, font, 5,
+                        655, 1153,
+                        "()ICCID" + informationLabel.getIcc(),
+                        height);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                drawBarcode(
+                        cs, doc,
+                        informationLabel.getIcc(),
+                        height, 158, 0, 1.2f);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         try {
             drawText(cs, font, 4,
                     211, 865,

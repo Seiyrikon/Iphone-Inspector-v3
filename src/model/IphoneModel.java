@@ -13,7 +13,7 @@ public class IphoneModel {
     private String serialNo = "";
     private String storageType;
     private String version = "";
-    private String icc;
+    private String icc = "";
     private String fcc;
     private String model = "";
     private String region = "";

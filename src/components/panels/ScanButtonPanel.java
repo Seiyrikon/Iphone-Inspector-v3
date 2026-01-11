@@ -24,6 +24,7 @@ import components.labels.IphoneInfoLabel;
 import components.labels.ScanButtonIconLabel;
 import components.labels.ScanButtonTextLabel;
 import components.textfields.EidTextField;
+import components.textfields.IccTextField;
 import components.textfields.Imei2TextField;
 import components.textfields.ImeiTextField;
 import components.textfields.ModelNoTextField;
@@ -276,6 +277,12 @@ public class ScanButtonPanel extends JPanel {
         informationLabel.setProductVersion(iphone.getProductVersion());
         infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.PRODUCT_VERSION.get()),
                 new ProductVersionTextField(informationLabel)));
+
+        if(!iphone.getIcc().isBlank()) {
+            informationLabel.setIcc(iphone.getIcc());
+            infoContainer.add(new CommonGroupPanel(new IphoneInfoLabel(Constants.ICC.get()), 
+                new IccTextField(informationLabel)));
+        }
 
         infoContainer.revalidate();
         infoContainer.repaint();

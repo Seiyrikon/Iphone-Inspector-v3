@@ -41,6 +41,7 @@ public enum Constants {
     PRODUCT_NAME("Product Name: "),
     PRODUCT_TYPE("Product Type: "),
     PRODUCT_VERSION("Product Version: "),
+    ICC("ICC ID: "),
 
     SINGLE_QUOTE_INFO_SEPARATOR("'"),
     SPACE_INFO_SEPARATOR(" "),

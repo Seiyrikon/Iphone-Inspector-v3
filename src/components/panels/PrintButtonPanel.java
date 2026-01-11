@@ -167,6 +167,10 @@ public class PrintButtonPanel extends JPanel {
                     System.out.println("Printing in 90mm x 30mm");
                     ZebraPrinterFactory.getInstance(printerConnection).printImage(toPrint, 0, 0,
                     945, 354, false);
+                } else if (informationLabel.is100x75() == true) {
+                    System.out.println("Printing in 100mm x 75mm");
+                    ZebraPrinterFactory.getInstance(printerConnection).printImage(toPrint, 0, 0,
+                    886, 1181, false);
                 }
             } catch (Exception e) {
             }

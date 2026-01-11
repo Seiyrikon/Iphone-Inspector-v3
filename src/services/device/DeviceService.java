@@ -76,7 +76,6 @@ public class DeviceService {
 
             if (part.contains("ProductType:")) {
                 String[] labels = part.split(Constants.SPACE_INFO_SEPARATOR.get());
-
                 if ("iPhone10,1".equals(labels[1]) 
                     || "iPhone10,4".equals(labels[1])) {
                     iphone.setProductType(Constants.IPHONE_8.get());
@@ -115,7 +114,8 @@ public class DeviceService {
                     iphone.setProductType(Constants.IPHONE_13_MINI.get());
                 } else if ("iPhone14,5".equals(labels[1])) {
                     iphone.setProductType(Constants.IPHONE_13.get());
-                } else if ("iPhone14,6".equals(labels[1])) {
+                } else if ("iPhone12,8".equals(labels[1]) 
+                    || "iPhone14,6".equals(labels[1])) {
                     iphone.setProductType(Constants.IPHONE_SE.get());
                 } else if ("iPhone14,7".equals(labels[1])) {
                     iphone.setProductType(Constants.IPHONE_14.get());
@@ -125,15 +125,31 @@ public class DeviceService {
                     iphone.setProductType(Constants.IPHONE_14_PRO.get());
                 } else if ("iPhone15,3".equals(labels[1])) {
                     iphone.setProductType(Constants.IPHONE_14_PRO_MAX.get());
-                } else if ("iPhone16,1".equals(labels[1])) {
+                } else if ("iPhone15,4".equals(labels[1])) {
                     iphone.setProductType(Constants.IPHONE_15.get());
-                } else if ("iPhone16,2".equals(labels[1])) {
+                } else if ("iPhone15,5".equals(labels[1])) {
                     iphone.setProductType(Constants.IPHONE_15_PLUS.get());
-                } else if ("iPhone16,3".equals(labels[1])) {
+                } else if ("iPhone16,1".equals(labels[1])) {
                     iphone.setProductType(Constants.IPHONE_15_PRO.get());
-                } else if ("iPhone16,4".equals(labels[1])) {
+                } else if ("iPhone16,2".equals(labels[1])) {
                     iphone.setProductType(Constants.IPHONE_15_PRO_MAX.get());
-                }
+                } else if ("iPhone17,3".equals(labels[1])) {
+                    iphone.setProductType(Constants.IPHONE_16.get());
+                } else if ("iPhone17,4".equals(labels[1])) {
+                    iphone.setProductType(Constants.IPHONE_16_PLUS.get());
+                } else if ("iPhone17,1".equals(labels[1])) {
+                    iphone.setProductType(Constants.IPHONE_16_PRO.get());
+                } else if ("iPhone17,2".equals(labels[1])) {
+                    iphone.setProductType(Constants.IPHONE_16_PRO_MAX.get());
+                } else if ("iPhone17,5".equals(labels[1])) {
+                    iphone.setProductType(Constants.IPHONE_16_E.get());
+                } else if ("iPhone18,3".equals(labels[1])) {
+                    iphone.setProductType(Constants.IPHONE_17.get());
+                } else if ("iPhone18,1".equals(labels[1])) {
+                    iphone.setProductType(Constants.IPHONE_17_PRO.get());
+                } else if ("iPhone18,2".equals(labels[1])) {
+                    iphone.setProductType(Constants.IPHONE_17_PRO_MAX.get());
+                } 
 
                 continue;
             }

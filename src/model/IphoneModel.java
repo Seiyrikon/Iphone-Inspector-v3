@@ -18,7 +18,7 @@ public class IphoneModel {
     private String model = "";
     private String region = "";
     private String productName = "";
-    private String productType = "";
+    private String productType = "iPhone 17 Pro";
     private String productColor = "";
     private String productVersion = "";
 
@@ -36,6 +36,10 @@ public class IphoneModel {
     private String[] iphone14ProAnd14ProMaxColors = {"Deep Purple", "Gold", "Silver", "Space Black"};
     private String[] iphone15And15PlusColors = {"Black", "Blue", "Green", "Pink", "Yellow"};
     private String[] iphone15ProAnd15ProMaxColors = {"Black Titanium", "Blue Titanium", "Natural Titanium", "White Titanium"};
+    private String[] iphone16And16PlusColors = {"Black", "Pink", "Teal", "Ultramarine", "White"};
+    private String[] iphone16ProAnd16ProMaxColors = {"Black Titanium", "Desert Titanium", "Natural Titanium", "White Titanium"};
+    private String[] iphone17Colors = {"Black", "Lavender", "Mist Blue", "Sage", "White"};
+    private String[] iphone17ProAnd17ProMaxColors = {"Cosmic Orange", "Deep Blue", "Silver"};
 
     private String[] storageTypes = {"64GB", "128GB", "256GB", "512GB", "1TB"};
 

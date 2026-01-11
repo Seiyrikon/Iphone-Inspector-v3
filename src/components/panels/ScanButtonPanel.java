@@ -231,6 +231,25 @@ public class ScanButtonPanel extends JPanel {
             colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone15ProAnd15ProMaxColors());
             colorDropdown.setChoice(informationLabel.getProductColor());
             informationLabel.setProductColor("Black Titanium");
+        } else if(Constants.IPHONE_16.get().equals(iphone.getProductType())
+                || Constants.IPHONE_16_PLUS.get().equals(iphone.getProductType())) {
+            colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone16And16PlusColors());
+            colorDropdown.setChoice(informationLabel.getProductColor());
+            informationLabel.setProductColor("Black");
+        } else if(Constants.IPHONE_16_PRO.get().equals(iphone.getProductType())
+                || Constants.IPHONE_16_PRO_MAX.get().equals(iphone.getProductType())) {
+            colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone16ProAnd16ProMaxColors());
+            colorDropdown.setChoice(informationLabel.getProductColor());
+            informationLabel.setProductColor("Black Titanium");
+        } else if(Constants.IPHONE_17.get().equals(iphone.getProductType())) {
+            colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone17Colors());
+            colorDropdown.setChoice(informationLabel.getProductColor());
+            informationLabel.setProductColor("Black");
+        } else if(Constants.IPHONE_17_PRO.get().equals(iphone.getProductType())
+                || Constants.IPHONE_17_PRO_MAX.get().equals(iphone.getProductType())) {
+            colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone17ProAnd17ProMaxColors());
+            colorDropdown.setChoice(informationLabel.getProductColor());
+            informationLabel.setProductColor("Cosmic Orange");
         } else {
             colorDropdown = new ColorTypeComboBox(informationLabel, iphone.getIphone8And8PlusColors());
             colorDropdown.setChoice(informationLabel.getProductColor());

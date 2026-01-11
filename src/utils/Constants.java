@@ -19,6 +19,7 @@ public enum Constants {
     SIZE120X80("120mm X 80mm"),
     SIZE20X80("30mm X 90mm"),
     SIZE100X75("100mm X 75mm"),
+    SIZE140X85("140mm X 85mm"),
     SIZE20X80_BLACK("30mm X 90mm Black"),
     SIZE_ICON("/resources/icons/size-icon.png"),
     SIZE_ICON_BlACK("/resources/icons/size-icon-black.png"),

@@ -97,6 +97,7 @@ public class Size120x80Panel extends JPanel {
                 // generatePdf();
                 informationLabel.set100x75(false);
                 informationLabel.set30x90(false);
+                informationLabel.set140x85(false);
                 informationLabel.set120x80(true);
                 viewPdf();
             }

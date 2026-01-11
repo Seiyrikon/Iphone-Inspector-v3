@@ -96,6 +96,7 @@ public class Size100x75Panel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 System.out.println("Size 100mm x 75mm Button clicked!");
                 informationLabel.set120x80(false);
+                informationLabel.set140x85(false);
                 informationLabel.set30x90(false);
                 informationLabel.set100x75(true);
                 viewPdf();

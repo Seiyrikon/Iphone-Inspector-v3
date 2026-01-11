@@ -40,23 +40,23 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.oned.Code128Writer;
 
 import components.frame.PdfViewerFrame;
-import components.labels.Size20x80IconLabel;
-import components.labels.Size20x80TextLabel;
+import components.labels.Size140x85IconLabel;
+import components.labels.Size140x85TextLabel;
 import model.IphoneLabelInformation;
 import utils.Constants;
 
-public class Size20x80Panel extends JPanel {
-    Size20x80IconLabel iconLabel;
-    Size20x80TextLabel textLabel;
+public class Size140x85Panel extends JPanel {
+    Size140x85IconLabel iconLabel;
+    Size140x85TextLabel textLabel;
 
     private boolean pressed = false;
     private Color normalColor = new Color(56, 57, 58);
     private Color hoverColor = new Color(240, 240, 240);
 
-    PdfViewerFrame pdfViewer;
+    public PdfViewerFrame pdfViewer;
     IphoneLabelInformation informationLabel;
 
-    public Size20x80Panel(PdfViewerFrame pdfViewer, IphoneLabelInformation informationLabel) {
+    public Size140x85Panel(PdfViewerFrame pdfViewer, IphoneLabelInformation informationLabel) {
         this.pdfViewer = pdfViewer;
         this.informationLabel = informationLabel;
 
@@ -66,8 +66,8 @@ public class Size20x80Panel extends JPanel {
 
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-        iconLabel = new Size20x80IconLabel();
-        textLabel = new Size20x80TextLabel();
+        iconLabel = new Size140x85IconLabel();
+        textLabel = new Size140x85TextLabel();
 
         add(Box.createHorizontalGlue());
         add(iconLabel);
@@ -92,11 +92,12 @@ public class Size20x80Panel extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Size 20mm x 80mm Button clicked!");
-                informationLabel.set120x80(false);
-                informationLabel.set140x85(false);
+                System.out.println("Size 140mm x 85mm Button clicked!");
+                // generatePdf();
                 informationLabel.set100x75(false);
-                informationLabel.set30x90(true);
+                informationLabel.set30x90(false);
+                informationLabel.set120x80(false);
+                informationLabel.set140x85(true);
                 viewPdf();
             }
 
@@ -139,6 +140,7 @@ public class Size20x80Panel extends JPanel {
         try {
             BufferedImage finalImage = ImageIO.read(new File("./images/rendered.png"));
             JFrame frame = new JFrame("Label Preview");
+            // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             Image scaled = finalImage.getScaledInstance(400, -1, Image.SCALE_FAST);
 
@@ -154,14 +156,14 @@ public class Size20x80Panel extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // Option 2
+        //Option 2
     }
 
     private void generatePdfImage() {
         try {
             // File dir = new File("C:/txt");
             // if (!dir.exists()) {
-            // dir.mkdirs(); // Creates directory if missing
+            //     dir.mkdirs(); // Creates directory if missing
             // }
             File txtDir = new File("./txt");
             if (!txtDir.exists()) {
@@ -175,8 +177,8 @@ public class Size20x80Panel extends JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        float height = mmToPt(30);
+        
+        float height = mmToPt(120);
         float width = mmToPt(80);
 
         PDDocument doc = new PDDocument();
@@ -199,7 +201,7 @@ public class Size20x80Panel extends JPanel {
 
         try {
             drawText(cs, font, 5,
-                    65, 115,
+                    65, 1229,
                     "EID " + informationLabel.getEid(),
                     height);
         } catch (Exception e) {
@@ -208,7 +210,7 @@ public class Size20x80Panel extends JPanel {
 
         try {
             drawText(cs, font, 5,
-                    65, 168,
+                    65, 1280,
                     "(S) Serial No. " + informationLabel.getSerialNo(),
                     height);
         } catch (Exception e) {
@@ -217,7 +219,7 @@ public class Size20x80Panel extends JPanel {
 
         try {
             drawText(cs, font, 5,
-                    65, 223,
+                    65, 1333,
                     "IMEI/MEID " + informationLabel.getImei(),
                     height);
         } catch (Exception e) {
@@ -226,7 +228,7 @@ public class Size20x80Panel extends JPanel {
 
         try {
             drawText(cs, font, 5,
-                    65, 45,
+                    65, 1175,
                     informationLabel.getModelRegion() + " " + informationLabel.getProductType() + ", "
                             + informationLabel.getProductColor() + ", " + informationLabel.getStorageType(),
                     height);
@@ -236,17 +238,17 @@ public class Size20x80Panel extends JPanel {
 
         try {
             drawText(cs, font, 5,
-                    65, 65,
-                    "Designed by Apple in California Assembled in China",
+                    65, 1200,
+                    "Other items as marked thereon Model A2482",
                     height);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         try {
-            drawText(cs, font, 5,
-                    65, 85,
-                    "Other items as marked thereon Model A2108",
+            drawText(cs, font, 4,
+                    211, 1100,
+                    "FCC ID: BCG-E4000A",
                     height);
         } catch (Exception e) {
             e.printStackTrace();
@@ -254,14 +256,23 @@ public class Size20x80Panel extends JPanel {
 
         try {
             drawBcLogo(cs, doc,
-                    151, 10);
+                    15, 67);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         try {
             drawFccLogo(cs, doc,
-                    165, 7);
+                    30, 65);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            drawText(cs, font, 4,
+                    211, 1125,
+                    "IC: 579C-E4000A",
+                    height);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -270,7 +281,7 @@ public class Size20x80Panel extends JPanel {
             drawBarcode(
                     cs, doc,
                     informationLabel.getEid(),
-                    height, 16, 50);
+                    height, 16, 38);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -280,7 +291,7 @@ public class Size20x80Panel extends JPanel {
             drawBarcode(
                     cs, doc,
                     informationLabel.getSerialNo(),
-                    height, 16, 37);
+                    height, 16, 25);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -290,7 +301,7 @@ public class Size20x80Panel extends JPanel {
             drawBarcode(
                     cs, doc,
                     informationLabel.getImei(),
-                    height, 16, 24, 1.2f);
+                    height, 16, 13, 1.2f);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -298,14 +309,14 @@ public class Size20x80Panel extends JPanel {
         /* -------- UPC A -------- */
         try {
             drawUpcABarcode(
-                    cs, doc, 145, 45);
+                    cs, doc, 152, 29);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         try {
             drawText(cs, font, 4,
-                    920, 123,
+                    623, 1255,
                     "UPC",
                     height);
         } catch (Exception e) {
@@ -316,7 +327,7 @@ public class Size20x80Panel extends JPanel {
 
             try {
                 drawText(cs, font, 5,
-                        65, 278,
+                        623, 1325,
                         "IMEI2 " + informationLabel.getImei2(),
                         height);
             } catch (Exception e) {
@@ -327,28 +338,10 @@ public class Size20x80Panel extends JPanel {
                 drawBarcode(
                         cs, doc,
                         informationLabel.getImei2(),
-                        height, 16, 11, 1.2f);
+                        height, 150, 14, 1.2f);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-
-        try {
-            drawText(cs, font, 4,
-                    780, 280,
-                    "FCC ID: BCG-E4000A",
-                    height);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            drawText(cs, font, 4,
-                    780, 300,
-                    "IC: 579C-E4000A",
-                    height);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
         try {
@@ -397,7 +390,7 @@ public class Size20x80Panel extends JPanel {
             String text,
             float pageHeight) throws Exception {
 
-        cs.beginText();
+        cs.beginText(); 
         cs.setFont(font, fontSize);
         cs.newLineAtOffset(
                 dotToPt(xDot),
@@ -498,15 +491,15 @@ public class Size20x80Panel extends JPanel {
     }
 
     private void drawBcLogo(PDPageContentStream cs,
-            PDDocument doc, int imageXPosition, int imageYPosition) throws Exception {
+        PDDocument doc, int imageXPosition, int imageYPosition) throws Exception {
 
-        PDImageXObject img = PDImageXObject.createFromFile(
-                "./static-images/bc_logo.png",
-                doc);
+    PDImageXObject img = PDImageXObject.createFromFile(
+            "./static-images/bc_logo.png",
+            doc);
 
-        cs.drawImage(img, imageXPosition,
-                imageYPosition,
-                mmToPt(5),
-                mmToPt(5));
-    }
+    cs.drawImage(img, imageXPosition,
+            imageYPosition,
+            mmToPt(5),
+            mmToPt(5));
+}
 }

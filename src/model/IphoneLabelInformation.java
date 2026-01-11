@@ -20,4 +20,5 @@ public class IphoneLabelInformation {
     private boolean is120x80 = false;
     private boolean is30x90 = false;
     private boolean is100x75 = false;
+    private boolean is140x85 = false;
 }

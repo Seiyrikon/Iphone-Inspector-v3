@@ -18,7 +18,7 @@ public class IphoneModel {
     private String model = "";
     private String region = "";
     private String productName = "";
-    private String productType = "iPhone 17 Pro";
+    private String productType = "";
     private String productColor = "";
     private String productVersion = "";
 

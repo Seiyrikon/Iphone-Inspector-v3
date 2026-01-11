@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -41,6 +42,7 @@ import components.labels.Size120x80IconLabel;
 import components.labels.Size120x80TextLabel;
 import model.IphoneLabelInformation;
 import model.PdfDocument;
+import utils.Constants;
 
 public class Size120x80Panel extends JPanel {
     Size120x80IconLabel iconLabel;
@@ -93,6 +95,8 @@ public class Size120x80Panel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 System.out.println("Size 120mm x 80mm Button clicked!");
                 // generatePdf();
+                informationLabel.set100x75(false);
+                informationLabel.set30x90(false);
                 informationLabel.set120x80(true);
                 viewPdf();
             }
@@ -142,6 +146,9 @@ public class Size120x80Panel extends JPanel {
 
             JLabel label = new JLabel(new ImageIcon(scaled));
             frame.add(label);
+
+            Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource(Constants.CELLWEGO_ICON.get()));
+            frame.setIconImage(icon);
 
             frame.pack();
             frame.setVisible(true);

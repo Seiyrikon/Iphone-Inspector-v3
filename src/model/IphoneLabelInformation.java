@@ -16,5 +16,7 @@ public class IphoneLabelInformation {
     private String productColor = "";
     private String productVersion = "";
 
-    private boolean is120x80 = true;
+    private boolean is120x80 = false;
+    private boolean is30x90 = false;
+    private boolean is100x75 = false;
 }

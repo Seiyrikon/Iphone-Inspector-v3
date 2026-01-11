@@ -122,41 +122,41 @@ public class ScanButtonPanel extends JPanel {
                         ? informationLabel.getEid()
                         : Constants.EMPTY_STRING.get());
 
-        // CommandResult device = deviceService.detect();
+        CommandResult device = deviceService.detect();
 
-        // if (device.output.isBlank()) {
-        //     UIManager.put("OptionPane.background", new Color(30, 30, 30));
-        //     UIManager.put("Panel.background", new Color(30, 30, 30));
-        //     UIManager.put("OptionPane.messageForeground", Color.WHITE);
-        //     UIManager.put("Button.background", new Color(56, 57, 58));
-        //     UIManager.put("Button.foreground", Color.WHITE);
+        if (device.output.isBlank()) {
+            UIManager.put("OptionPane.background", new Color(30, 30, 30));
+            UIManager.put("Panel.background", new Color(30, 30, 30));
+            UIManager.put("OptionPane.messageForeground", Color.WHITE);
+            UIManager.put("Button.background", new Color(56, 57, 58));
+            UIManager.put("Button.foreground", Color.WHITE);
 
-        //     JOptionPane.showMessageDialog(
-        //             SwingUtilities.getWindowAncestor(this),
-        //             "No device detected! Please reconnect the cable.",
-        //             "Scan Failed",
-        //             JOptionPane.WARNING_MESSAGE,
-        //             new DisconnectedIcon());
-        //     return;
-        // }
+            JOptionPane.showMessageDialog(
+                    SwingUtilities.getWindowAncestor(this),
+                    "No device detected! Please reconnect the cable.",
+                    "Scan Failed",
+                    JOptionPane.WARNING_MESSAGE,
+                    new DisconnectedIcon());
+            return;
+        }
 
-        // iphone = deviceService.extractInfo();
+        iphone = deviceService.extractInfo();
 
-        // if(iphone.isFailed == true) {
-        //     UIManager.put("OptionPane.background", new Color(30, 30, 30));
-        //     UIManager.put("Panel.background", new Color(30, 30, 30));
-        //     UIManager.put("OptionPane.messageForeground", Color.WHITE);
-        //     UIManager.put("Button.background", new Color(56, 57, 58));
-        //     UIManager.put("Button.foreground", Color.WHITE);
+        if(iphone.isFailed == true) {
+            UIManager.put("OptionPane.background", new Color(30, 30, 30));
+            UIManager.put("Panel.background", new Color(30, 30, 30));
+            UIManager.put("OptionPane.messageForeground", Color.WHITE);
+            UIManager.put("Button.background", new Color(56, 57, 58));
+            UIManager.put("Button.foreground", Color.WHITE);
 
-        //     JOptionPane.showMessageDialog(
-        //             SwingUtilities.getWindowAncestor(this),
-        //             "Device Failure! Select \"Trust\" on the device.",
-        //             "Device Failed",
-        //             JOptionPane.WARNING_MESSAGE,
-        //             new PhoneFailedIcon());
-        //     return;
-        // }
+            JOptionPane.showMessageDialog(
+                    SwingUtilities.getWindowAncestor(this),
+                    "Device Failure! Select \"Trust\" on the device.",
+                    "Device Failed",
+                    JOptionPane.WARNING_MESSAGE,
+                    new PhoneFailedIcon());
+            return;
+        }
 
         // --- EID ---
         infoContainer.add(
